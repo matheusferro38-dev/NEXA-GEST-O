@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crie seu acesso à Nexa Gestão e organize a gestão do seu restaurante.">
+    <title>Criar conta | Nexa Gestão</title>
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="auth-aside" aria-label="Sobre a Nexa Gestão">
+            <a class="auth-brand" href="../index.html"><span class="auth-brand-mark" aria-hidden="true">n</span> Nexa Gestão</a>
+            <div class="auth-aside-copy">
+                <span class="auth-kicker">Gestão para restaurantes</span>
+                <h1>Organize sua equipe e acompanhe cada parte da operação.</h1>
+                <p>Tenha um espaço claro para cuidar de mesas, pedidos, estoque, cozinha e financeiro.</p>
+            </div>
+            <div class="auth-aside-footer">Nexa Gestão · Gestão do seu restaurante</div>
+        </section>
+        <section class="register-card" aria-labelledby="registerTitle">
+        <a class="auth-brand auth-form-brand" href="../index.html"><span class="auth-brand-mark" aria-hidden="true">n</span> Nexa Gestão</a>
+        <h2 id="registerTitle">Crie sua conta Nexa Gestão</h2>
+        <p class="auth-intro">Preencha seus dados para começar a organizar sua operação.</p>
+        
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="exemplo@email.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Palavra-passe</label>
+            <input type="password" id="password" placeholder="Sua palavra-passe segura">
+        </div>
+        
+        <button onclick="handleRegister()">Registar</button>
+        
+        <div id="msg" class="msg" role="status" aria-live="polite"></div>
+
+        <div class="links">
+            Já tem conta? <a href="login.html">Entrar</a>
+        </div>
+        </section>
+    </main>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000";
+
+        async function handleRegister() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const msgDiv = document.getElementById("msg");
+
+            msgDiv.innerText = "";
+            msgDiv.className = "msg";
+
+            if (!email || !password) {
+                msgDiv.innerText = "Preencha todos os campos!";
+                msgDiv.classList.add("error");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || "Erro ao registar utilizador.");
+                }
+
+                msgDiv.innerText = "Conta criada com sucesso! A redirecionar para o login...";
+                msgDiv.classList.add("success");
+
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 1500);
+
+            } catch (error) {
+                msgDiv.innerText = error.message;
+                msgDiv.classList.add("error");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Gestão — Painel de Administração Global</title>
+    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+    <!-- Sidebar do Administrador SaaS -->
+    <aside>
+        <div>
+            <div class="logo">Nexa <span>Gestão</span></div>
+            <ul class="nav-links">
+                <li><a href="admin_saas.html" class="active">Gestão global</a></li>
+                <li><a href="pages/dashboard.html">Visão geral</a></li>
+                <li><a href="pages/products.html">Produtos e estoque</a></li>
+                <li><a href="pages/tables.html">Mesas e pedidos</a></li>
+                <li><a href="pages/kitchen.html">Cozinha (KDS)</a></li>
+                <li><a href="pages/financial.html">Financeiro</a></li>
+                <li><a href="pages/employees.html">Equipe</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" onclick="handleLogout()">Terminar Sessão</button>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <header>
+            <div>
+                <h1 style="margin-bottom: 4px;">Painel Master SaaS</h1>
+                <p style="color: var(--gray); font-size: 14px;">Monitorização global de inquilinos, faturas e métricas de receita da plataforma.</p>
+            </div>
+            <div class="saas-header-actions">
+                <button class="btn-saas-secondary" onclick="exportSaasReport()">
+                    📥 Exportar Relatório
+                </button>
+                <button class="btn-saas-primary" onclick="openModal()">
+                    + Novo Estabelecimento
+                </button>
+            </div>
+        </header>
+
+        <!-- Cartões de Resumo da Plataforma SaaS -->
+        <div class="saas-metrics-grid">
+            <div class="saas-card blue">
+                <div class="saas-card-title">Total de Estabelecimentos</div>
+                <div class="saas-card-value" id="metricTotal">0</div>
+                <div class="saas-card-trend" style="color: var(--success);">Plataforma ativa</div>
+            </div>
+            <div class="saas-card green">
+                <div class="saas-card-title">Assinaturas Ativas</div>
+                <div class="saas-card-value" id="metricActiveCount" style="color: var(--color-success);">0</div>
+                <div class="saas-card-trend" style="color: var(--success);">Em dia</div>
+            </div>
+            <div class="saas-card red">
+                <div class="saas-card-title">Pendentes / Em Atraso</div>
+                <div class="saas-card-value" id="metricPending" style="color: var(--color-danger);">0</div>
+                <div class="saas-card-trend" style="color: var(--color-danger);">Nenhum alerta</div>
+            </div>
+            <div class="saas-card purple">
+                <div class="saas-card-title">Receita Recorrente (MRR)</div>
+                <div class="saas-card-value" id="metricMRR" style="color: var(--color-primary);">R$ 0</div>
+                <div class="saas-card-trend" style="color: var(--success);">Total mensal</div>
+            </div>
+        </div>
+
+        <!-- Filtros e Barra de Pesquisa Avançada -->
+        <div class="saas-filter-bar">
+            <div class="search-input-wrapper">
+                <span>🔍</span>
+                <input type="text" id="searchTenant" placeholder="Pesquisar por nome do estabelecimento, responsável ou email..." onkeyup="filterTenants()">
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="setFilter('all', this)">Todos</button>
+                <button class="filter-tab" onclick="setFilter('ativo', this)">Ativos</button>
+                <button class="filter-tab" onclick="setFilter('pendente', this)">Em Atraso</button>
+            </div>
+        </div>
+
+        <!-- Tabela de Gestão de Clientes SaaS -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estabelecimento / Conta</th>
+                        <th>Plano Subscrito</th>
+                        <th>Vencimento</th>
+                        <th>Estado</th>
+                        <th style="text-align: right;">Ações de Gestão</th>
+                    </tr>
+                </thead>
+                <tbody id="saasTableBody">
+                    <tr id="emptyRow">
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <p style="font-size: 15px; font-weight: 600; margin-bottom: 4px;">Nenhum estabelecimento registado ainda.</p>
+                                <p style="font-size: 13px;">Clique em "+ Novo Estabelecimento" para adicionar o primeiro cliente à plataforma.</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para Criação de Novo Cliente/Estabelecimento -->
+    <div class="modal-overlay" id="tenantModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Registar Novo Estabelecimento</div>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <form id="newTenantForm" onsubmit="handleCreateTenant(event)">
+                <div class="form-group">
+                    <label>Nome do Estabelecimento / Restaurante</label>
+                    <input type="text" id="storeName" placeholder="Ex: Cantina do Chef" required>
+                </div>
+                <div class="form-group">
+                    <label>Nome do Responsável / Administrador</label>
+                    <input type="text" id="ownerName" placeholder="Ex: Roberto Silva" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail de Acesso</label>
+                    <input type="email" id="ownerEmail" placeholder="roberto@cantinachef.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Plano Subscrito</label>
+                    <select id="planSelect">
+                        <option value="basico">Básico — R$ 99,00 / mês</option>
+                        <option value="pro" selected>Profissional — R$ 199,00 / mês</option>
+                        <option value="enterprise">Enterprise — R$ 399,00 / mês</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-saas-secondary" onclick="closeModal()">Cancelar</button>
+                    <button type="submit" class="btn-saas-primary">Criar Conta e Acesso</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ligação ao Ficheiro JavaScript Externo -->
+    <script src="js/admin_saas.js"></script>
+</body>
+</html>

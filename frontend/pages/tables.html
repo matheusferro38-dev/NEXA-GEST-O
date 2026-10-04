@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Gestão — Mesas e Pedidos</title>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+
+    <!-- Sidebar de Navegação -->
+    <aside>
+        <div>
+            <div class="logo">Nexa <span>Gestão</span></div>
+            <ul class="nav-links">
+                <li><a href="../admin_saas.html">Gestão global</a></li>
+                <li><a href="dashboard.html">Visão geral</a></li>
+                <li><a href="products.html">Produtos e estoque</a></li>
+                <li><a href="tables.html" class="active">Mesas e pedidos</a></li>
+                <li><a href="kitchen.html">Cozinha (KDS)</a></li>
+                <li><a href="financial.html">Financeiro</a></li>
+                <li><a href="employees.html">Equipe</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" onclick="window.location.href='../index.html'">Terminar Sessão</button>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <header>
+            <div>
+                <h1 style="margin-bottom: 4px;">Gestão de Mesas e Pedidos</h1>
+                <p style="color: var(--gray); font-size: 14px;">Controle o atendimento de salão, comandas e consumo das mesas.</p>
+            </div>
+            <div class="saas-header-actions">
+                <button class="btn-saas-secondary" onclick="exportTableReport()">
+                    📥 Exportar Relatório
+                </button>
+                <button class="btn-saas-primary" onclick="openTableModal()">
+                    + Abrir Mesa / Comanda
+                </button>
+            </div>
+        </header>
+
+        <!-- Cartões de Métricas de Mesas -->
+        <div class="saas-metrics-grid">
+            <div class="saas-card blue">
+                <div class="saas-card-title">Total de Registos</div>
+                <div class="saas-card-value" id="metricTotalTables">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Mesas e comandas ativas</div>
+            </div>
+            <div class="saas-card orange">
+                <div class="saas-card-title">Mesas Ocupadas</div>
+                <div class="saas-card-value" id="metricOccupiedTables">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Com consumo em aberto</div>
+            </div>
+            <div class="saas-card green">
+                <div class="saas-card-title">Consumo Total Ativo</div>
+                <div class="saas-card-value" id="metricTotalConsumption" style="color: var(--color-success);">R$ 0,00</div>
+                <div style="font-size: 13px; color: var(--gray);">Valor somado em salão</div>
+            </div>
+        </div>
+
+        <!-- Tabela de Mesas -->
+        <div class="saas-table-container">
+            <div class="saas-table-header">
+                <div class="saas-table-title">Controlo de Atendimento</div>
+                <span style="font-size: 13px; color: var(--gray);">Gestão operacional livre</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identificação</th>
+                        <th>Cliente / Responsável</th>
+                        <th>Estado</th>
+                        <th>Consumo Atual</th>
+                        <th style="text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tablesTableBody">
+                    <tr>
+                        <td colspan="5" class="empty-row-state">Nenhuma mesa ou comanda aberta no momento.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para Abrir Mesa / Comanda -->
+    <div class="modal-overlay" id="tableModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Abrir Nova Mesa ou Comanda</div>
+                <button class="modal-close" onclick="closeTableModal()">✕</button>
+            </div>
+            <form id="newTableForm" onsubmit="handleCreateTable(event)">
+                <div class="form-group">
+                    <label>Identificação da Mesa / Comanda</label>
+                    <input type="text" id="tableNameInput" placeholder="Ex: Mesa 05 / Comanda 12" required>
+                </div>
+                <div class="form-group">
+                    <label>Nome do Cliente / Responsável</label>
+                    <input type="text" id="tableClientInput" placeholder="Ex: Mateus Silva" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado Inicial</label>
+                    <select id="tableStatusInput">
+                        <option value="ocupada">Ocupada</option>
+                        <option value="livre">Livre / Disponível</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Consumo Inicial (R$)</label>
+                    <input type="number" step="0.01" id="tableConsumptionInput" placeholder="Ex: 85.50" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-saas-secondary" onclick="closeTableModal()">Cancelar</button>
+                    <button type="submit" class="btn-saas-primary">Registar Mesa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ligação ao Script Externo de Mesas -->
+    <script src="../js/tables.js"></script>
+</body>
+</html>

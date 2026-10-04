@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Gestão — Visão Geral (Dashboard)</title>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+
+    <!-- Sidebar de Navegação -->
+    <aside>
+        <div>
+            <div class="logo">Nexa <span>Gestão</span></div>
+            <ul class="nav-links">
+                <li><a href="../admin_saas.html">Gestão global</a></li>
+                <li><a href="dashboard.html" class="active">Visão geral</a></li>
+                <li><a href="products.html">Produtos e estoque</a></li>
+                <li><a href="tables.html">Mesas e pedidos</a></li>
+                <li><a href="kitchen.html">Cozinha (KDS)</a></li>
+                <li><a href="financial.html">Financeiro</a></li>
+                <li><a href="employees.html">Equipe</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" onclick="window.location.href='../index.html'">Terminar Sessão</button>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <header>
+            <div>
+                <h1 style="margin-bottom: 4px;">Visão Geral do Estabelecimento</h1>
+                <p style="color: var(--gray); font-size: 14px;">Monitorização em tempo real das operações e métricas do restaurante.</p>
+            </div>
+            <div class="saas-header-actions">
+                <button class="btn-saas-secondary" onclick="refreshDashboard()">
+                    🔄 Atualizar Métricas
+                </button>
+                <button class="btn-saas-primary" onclick="openActivityModal()">
+                    + Registar Apontamento
+                </button>
+            </div>
+        </header>
+
+        <!-- Cartões de Métricas Principais -->
+        <div class="saas-metrics-grid">
+            <div class="saas-card blue">
+                <div class="saas-card-title">Faturação do Dia</div>
+                <div class="saas-card-value" id="dashMetricRevenue">R$ 0,00</div>
+                <div style="font-size: 13px; color: var(--gray);">Entradas de caixa</div>
+            </div>
+            <div class="saas-card orange">
+                <div class="saas-card-title">Mesas Ativas</div>
+                <div class="saas-card-value" id="dashMetricTables">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Em atendimento</div>
+            </div>
+            <div class="saas-card purple">
+                <div class="saas-card-title">Pedidos na Cozinha</div>
+                <div class="saas-card-value" id="dashMetricKitchen">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Fila de produção KDS</div>
+            </div>
+            <div class="saas-card green">
+                <div class="saas-card-title">Colaboradores</div>
+                <div class="saas-card-value" id="dashMetricEmployees">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Equipa ao serviço</div>
+            </div>
+        </div>
+
+        <!-- Tabela de Atividades / Registos Recentes -->
+        <div class="saas-table-container">
+            <div class="saas-table-header">
+                <div class="saas-table-title">Registo de Atividades e Avisos Operacionais</div>
+                <span style="font-size: 13px; color: var(--gray);">Gestão livre de apontamentos</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hora / Data</th>
+                        <th>Categoria</th>
+                        <th>Descrição da Atividade</th>
+                        <th style="text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardActivityBody">
+                    <tr>
+                        <td colspan="4" class="empty-row-state">Nenhum apontamento registado no momento.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para Novo Apontamento no Dashboard -->
+    <div class="modal-overlay" id="activityModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Registar Novo Apontamento</div>
+                <button class="modal-close" onclick="closeActivityModal()">✕</button>
+            </div>
+            <form id="newActivityForm" onsubmit="handleCreateActivity(event)">
+                <div class="form-group">
+                    <label>Hora / Momento</label>
+                    <input type="text" id="actTimeInput" placeholder="Ex: 19:30" required>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <input type="text" id="actCategoryInput" placeholder="Ex: Aviso / Caixa / Salão" required>
+                </div>
+                <div class="form-group">
+                    <label>Descrição do Apontamento</label>
+                    <input type="text" id="actDescInput" placeholder="Ex: Abertura de turno realizada com sucesso" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-saas-secondary" onclick="closeActivityModal()">Cancelar</button>
+                    <button type="submit" class="btn-saas-primary">Guardar Registo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ligação ao Script Externo do Dashboard -->
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

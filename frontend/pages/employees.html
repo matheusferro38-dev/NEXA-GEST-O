@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Gestão — Gestão de Funcionários</title>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/app.css">
+</head>
+<body>
+
+    <!-- Sidebar de Navegação -->
+    <aside>
+        <div>
+            <div class="logo">Nexa <span>Gestão</span></div>
+            <ul class="nav-links">
+                <li><a href="../admin_saas.html">Gestão global</a></li>
+                <li><a href="dashboard.html">Visão geral</a></li>
+                <li><a href="products.html">Produtos e estoque</a></li>
+                <li><a href="tables.html">Mesas e pedidos</a></li>
+                <li><a href="kitchen.html">Cozinha (KDS)</a></li>
+                <li><a href="financial.html">Financeiro</a></li>
+                <li><a href="employees.html" class="active">Equipe</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" onclick="window.location.href='../index.html'">Terminar Sessão</button>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <header>
+            <div>
+                <h1 style="margin-bottom: 4px;">Gestão de Funcionários</h1>
+                <p style="color: var(--gray); font-size: 14px;">Administre a equipa, funções e acessos operacionais.</p>
+            </div>
+            <div class="saas-header-actions">
+                <button class="btn-saas-secondary" onclick="exportEmployeeReport()">
+                    📥 Exportar Equipa
+                </button>
+                <button class="btn-saas-primary" onclick="openEmployeeModal()">
+                    + Novo Funcionário
+                </button>
+            </div>
+        </header>
+
+        <!-- Cartões de Métricas de Funcionários -->
+        <div class="saas-metrics-grid">
+            <div class="saas-card blue">
+                <div class="saas-card-title">Total de Colaboradores</div>
+                <div class="saas-card-value" id="metricTotalEmployees">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Equipa registada</div>
+            </div>
+            <div class="saas-card green">
+                <div class="saas-card-title">Folha Salarial Mensal</div>
+                <div class="saas-card-value" id="metricTotalPayroll" style="color: var(--color-success);">R$ 0,00</div>
+                <div style="font-size: 13px; color: var(--gray);">Soma de vencimentos</div>
+            </div>
+            <div class="saas-card purple">
+                <div class="saas-card-title">Cargos Diferentes</div>
+                <div class="saas-card-value" id="metricRolesCount">0</div>
+                <div style="font-size: 13px; color: var(--gray);">Funções exercidas</div>
+            </div>
+        </div>
+
+        <!-- Tabela de Funcionários -->
+        <div class="saas-table-container">
+            <div class="saas-table-header">
+                <div class="saas-table-title">Equipa Ativa</div>
+                <span style="font-size: 13px; color: var(--gray);">Gestão operacional livre</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome Completo</th>
+                        <th>Cargo / Função</th>
+                        <th>Contacto</th>
+                        <th>Salário Base</th>
+                        <th style="text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="employeesTableBody">
+                    <tr>
+                        <td colspan="5" class="empty-row-state">Nenhum funcionário registado na equipa.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para Novo Funcionário -->
+    <div class="modal-overlay" id="employeeModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Registar Novo Funcionário</div>
+                <button class="modal-close" onclick="closeEmployeeModal()">✕</button>
+            </div>
+            <form id="newEmployeeForm" onsubmit="handleCreateEmployee(event)">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="empNameInput" placeholder="Ex: Ana Souza" required>
+                </div>
+                <div class="form-group">
+                    <label>Cargo / Função</label>
+                    <input type="text" id="empRoleInput" placeholder="Ex: Chefe de Cozinha / Atendente" required>
+                </div>
+                <div class="form-group">
+                    <label>Contacto (Telefone / Email)</label>
+                    <input type="text" id="empContactInput" placeholder="Ex: (11) 98765-4321" required>
+                </div>
+                <div class="form-group">
+                    <label>Salário Base (R$)</label>
+                    <input type="number" step="0.01" id="empSalaryInput" placeholder="Ex: 2500.00" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-saas-secondary" onclick="closeEmployeeModal()">Cancelar</button>
+                    <button type="submit" class="btn-saas-primary">Registar Colaborador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ligação ao Script Externo de Funcionários -->
+    <script src="../js/employees.js"></script>
+</body>
+</html>

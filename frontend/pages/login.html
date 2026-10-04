@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acesse sua conta Nexa Gestão e acompanhe a operação do seu restaurante.">
+    <title>Entrar | Nexa Gestão</title>
+<link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <main class="auth-layout">
+        <section class="auth-aside" aria-label="Sobre a Nexa Gestão">
+            <a class="auth-brand" href="../index.html"><span class="auth-brand-mark" aria-hidden="true">n</span> Nexa Gestão</a>
+            <div class="auth-aside-copy">
+                <span class="auth-kicker">Gestão para restaurantes</span>
+                <h1>Uma operação organizada começa com uma visão clara.</h1>
+                <p>Mesas, pedidos, estoque, cozinha e financeiro reunidos para acompanhar o ritmo do seu negócio.</p>
+            </div>
+            <div class="auth-aside-footer">Nexa Gestão · Gestão do seu restaurante</div>
+        </section>
+        <section class="login-card" aria-labelledby="loginTitle">
+            <a class="auth-brand auth-form-brand" href="../index.html"><span class="auth-brand-mark" aria-hidden="true">n</span> Nexa Gestão</a>
+        <h2 id="loginTitle">Bem-vindo de volta</h2>
+        <p class="auth-intro">Entre para acessar as ferramentas da sua operação.</p>
+        
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="exemplo@email.com">
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Palavra-passe</label>
+            <input type="password" id="password" placeholder="Sua palavra-passe">
+        </div>
+        
+        <button onclick="handleLogin()">Entrar</button>
+        
+        <div id="msg" class="msg" role="status" aria-live="polite"></div>
+
+        <div class="links">
+            Ainda não tem conta? <a href="register.html">Registar-se</a>
+        </div>
+        </section>
+    </main>
+
+    <script>
+        const API_URL = "http://127.0.0.1:8000";
+
+        async function handleLogin() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const msgDiv = document.getElementById("msg");
+
+            msgDiv.innerText = "";
+            msgDiv.className = "msg";
+
+            if (!email || !password) {
+                msgDiv.innerText = "Preencha todos os campos!";
+                msgDiv.classList.add("error");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || "Erro ao efetuar login.");
+                }
+
+                msgDiv.innerText = "Login efetuado com sucesso! A redirecionar...";
+                msgDiv.classList.add("success");
+
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 1000);
+
+            } catch (error) {
+                msgDiv.innerText = error.message;
+                msgDiv.classList.add("error");
+            }
+        }
+    </script>
+</body>
+</html>

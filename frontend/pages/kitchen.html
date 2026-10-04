@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Gestão — Cozinha (KDS)</title>
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/app.css">
+</head>
+<body class="kds-page">
+
+    <!-- Sidebar de Navegação -->
+    <aside>
+        <div>
+            <div class="logo">Nexa <span>Gestão</span></div>
+            <ul class="nav-links">
+                <li><a href="../admin_saas.html">Gestão global</a></li>
+                <li><a href="dashboard.html">Visão geral</a></li>
+                <li><a href="products.html">Produtos e estoque</a></li>
+                <li><a href="tables.html">Mesas e pedidos</a></li>
+                <li><a href="kitchen.html" class="active">Cozinha (KDS)</a></li>
+                <li><a href="financial.html">Financeiro</a></li>
+                <li><a href="employees.html">Equipe</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn" onclick="window.location.href='../index.html'">Terminar Sessão</button>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main>
+        <header>
+            <div>
+                <h1 style="margin-bottom: 4px;">📺 Display de Cozinha (KDS)</h1>
+                <p style="color: var(--color-kds-text-secondary); font-size: 14px;">Monitorização em tempo real dos pedidos enviados para o preparo.</p>
+            </div>
+            <div class="saas-header-actions">
+                <button class="btn-saas-secondary" onclick="loadKitchenOrders()">
+                    🔄 Atualizar Display
+                </button>
+                <button class="btn-saas-primary" onclick="openKitchenModal()">
+                    + Novo Pedido
+                </button>
+            </div>
+        </header>
+
+        <!-- Cartões de Métricas do KDS -->
+        <div class="saas-metrics-grid">
+            <div class="saas-card yellow">
+                <div class="saas-card-title">Em Preparo</div>
+                <div class="saas-card-value" id="metricPreparingCount">0</div>
+                <div style="font-size: 13px; color: var(--color-kds-text-secondary);">Na chapa / cozinha</div>
+            </div>
+            <div class="saas-card green">
+                <div class="saas-card-title">Prontos para Entrega</div>
+                <div class="saas-card-value" id="metricReadyCount">0</div>
+                <div style="font-size: 13px; color: var(--color-kds-text-secondary);">Aguardando sala</div>
+            </div>
+            <div class="saas-card blue">
+                <div class="saas-card-title">Total na Fila</div>
+                <div class="saas-card-value" id="metricTotalQueue">0</div>
+                <div style="font-size: 13px; color: var(--color-kds-text-secondary);">Fluxo operacional atual</div>
+            </div>
+        </div>
+
+        <!-- Tabela do Display de Cozinha -->
+        <div class="saas-table-container">
+            <div class="saas-table-header">
+                <div class="saas-table-title">Fila de Produção KDS</div>
+                <span style="font-size: 13px; color: var(--color-kds-text-secondary);">Display ativo</span>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº do Pedido</th>
+                        <th>Mesa / Origem</th>
+                        <th>Itens Solicitados</th>
+                        <th>Estado</th>
+                        <th style="text-align: right;">Ações de Controlo</th>
+                    </tr>
+                </thead>
+                <tbody id="kitchenTableBody">
+                    <tr>
+                        <td colspan="5" class="empty-row-state">Nenhum pedido ativo na cozinha no momento.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para Novo Pedido na Cozinha -->
+    <div class="modal-overlay" id="kitchenModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div class="modal-title">Lançar Novo Pedido na Cozinha</div>
+                <button class="modal-close" onclick="closeKitchenModal()">✕</button>
+            </div>
+            <form id="newKitchenForm" onsubmit="handleCreateKitchenOrder(event)">
+                <div class="form-group">
+                    <label>Identificação do Pedido</label>
+                    <input type="text" id="kdsOrderNumInput" placeholder="Ex: #105" required>
+                </div>
+                <div class="form-group">
+                    <label>Mesa ou Local de Origem</label>
+                    <input type="text" id="kdsTableInput" placeholder="Ex: Mesa 04 / Balcão" required>
+                </div>
+                <div class="form-group">
+                    <label>Itens Solicitados</label>
+                    <input type="text" id="kdsItemsInput" placeholder="Ex: 2x Picanha, 1x Coca-Cola" required>
+                </div>
+                <div class="form-group">
+                    <label>Estado Inicial</label>
+                    <select id="kdsStatusInput">
+                        <option value="preparando">Em Preparo</option>
+                        <option value="pronto">Pronto</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-saas-secondary" onclick="closeKitchenModal()">Cancelar</button>
+                    <button type="submit" class="btn-saas-primary">Enviar para Cozinha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Ligação ao Script Externo do KDS -->
+    <script src="../js/kitchen.js"></script>
+</body>
+</html>
