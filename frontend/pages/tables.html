@@ -1,128 +1,409 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexa Gestão — Mesas e Pedidos</title>
-    <link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/app.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Nexa Gestão — Mesas e Comandas</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap">
+<style>
+:root{--p:#174a6e;--ph:#103c5b;--pl:#e8f0f6;--s:#2b6f79;--bg:#f2f5f8;--bg2:#eaf0f4;--sf:#fff;--sf2:#f7f9fb;--hv:#eff4f7;--bd:#d5dfe8;--dv:#e4eaf0;--tx:#172b3d;--t2:#496074;--tm:#5e7183;--ok:#17684b;--okb:#e9f3ed;--er:#a43431;--erb:#f8eae9;--wn:#765200;--wnb:#faf1dc;--fr:rgba(23,74,110,.24);--sh:0 1px 3px rgba(23,43,61,.05);--sm:0 8px 22px rgba(23,43,61,.08)}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Manrope','Segoe UI',system-ui,sans-serif}
+body{display:flex;min-height:100vh;background:var(--bg);color:var(--tx);font-size:13px}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--fr);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+aside{position:sticky;top:0;width:240px;min-width:240px;height:100vh;padding:24px 14px 16px;background:var(--sf);border-right:1px solid var(--dv);display:flex;flex-direction:column;justify-content:space-between}
+.logo{padding:0 10px;margin-bottom:24px;font-size:19px;font-weight:800}.logo span{color:var(--p)}
+.nl{padding:0 12px 8px;color:#8695a4;font-size:10px;font-weight:800;letter-spacing:.9px;text-transform:uppercase}
+.nav{list-style:none;display:flex;flex-direction:column;gap:3px;margin-bottom:18px}
+.nav a{display:block;padding:10px 12px;border-radius:9px;color:var(--t2);font-size:12.5px;font-weight:700;text-decoration:none}
+.nav a:hover{background:var(--hv);color:var(--p)}
+.nav a.on{background:var(--pl);color:var(--p);font-weight:800}
+.out{width:100%;padding:10px 12px;border:0;border-radius:9px;background:none;color:var(--er);font-weight:700;text-align:left}
+.out:hover{background:var(--erb)}
+main{flex:1;min-width:0;padding:30px 36px 44px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:18px;border-bottom:1px solid var(--dv)}
+h1{font-size:22px;font-weight:800}.sub{margin-top:4px;color:var(--tm);font-size:12px}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:8px 14px;border-radius:6px;border:1px solid var(--bd);background:var(--sf);color:var(--t2);font-size:12px;font-weight:700}
+.btn:hover{border-color:var(--p);background:var(--hv)}
+.btn.pr{background:var(--p);border-color:var(--p);color:#fff}.btn.pr:hover{background:var(--ph)}
+.btn.sm{min-height:30px;padding:4px 10px;font-size:11px}
+.btn.dg:hover{border-color:var(--er);background:var(--erb);color:var(--er)}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:16px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
+.metric{padding:18px 20px;border-left:3px solid var(--a)}
+.mt{color:var(--tm);font-size:10px;font-weight:800;letter-spacing:.7px;text-transform:uppercase}
+.mv{margin:8px 0 2px;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.mf{color:var(--tm);font-size:11.5px}
+.bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--dv)}
+.bar input[type=search]{min-height:38px;width:min(100%,300px);padding:8px 12px;border:1px solid var(--bd);border-radius:6px;background:var(--sf2);font-size:12px}
+.seg{display:inline-flex;padding:4px;border-radius:9px;background:var(--bg2)}
+.seg button{padding:6px 14px;border:0;border-radius:6px;background:none;color:var(--tm);font-size:11.5px;font-weight:700}
+.seg button.on{background:#fff;color:var(--p);box-shadow:var(--sh)}
+.scroll{overflow-x:auto}
+table{width:100%;min-width:760px;border-collapse:collapse}
+th{padding:12px 20px;background:var(--sf2);color:var(--tm);font-size:9.5px;font-weight:800;letter-spacing:.7px;text-align:left;text-transform:uppercase;border-bottom:1px solid var(--dv)}
+td{padding:13px 20px;border-bottom:1px solid var(--dv);color:var(--t2);font-size:12px;vertical-align:middle}
+tbody tr:hover td{background:var(--hv)}tbody tr:last-child td{border:0}
+td b{display:block;color:var(--tx);font-size:12.5px}td small{color:var(--tm);font-size:11px}
+.r{text-align:right}.ra{display:flex;justify-content:flex-end;gap:6px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:20px;font-size:10.5px;font-weight:800}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge.oc{background:var(--wnb);color:var(--wn)}.badge.li{background:var(--okb);color:var(--ok)}
+.empty{display:none;padding:40px 20px;text-align:center;color:var(--tm)}.empty.show{display:block}
+.empty b{display:block;color:var(--tx);font-size:14px;margin-bottom:4px}
+.foot{display:flex;justify-content:space-between;gap:10px;padding:12px 20px;border-top:1px solid var(--dv);color:var(--tm);font-size:11.5px}
+.ov{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto;background:rgba(13,32,48,.48)}
+.ov.open{display:flex}
+.mc{width:min(100%,500px);max-height:calc(100vh - 40px);overflow-y:auto;padding:24px;background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:0 18px 40px rgba(23,43,61,.13)}
+.mh{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.mh h2{font-size:17px;font-weight:800}
+.x{width:32px;height:32px;border:1px solid var(--bd);border-radius:6px;background:#fff;color:var(--t2)}
+.f{margin-bottom:12px}
+.f label{display:block;margin-bottom:5px;color:var(--t2);font-size:11.5px;font-weight:700}
+.f input,.f select{width:100%;min-height:40px;padding:9px 12px;border:1px solid var(--bd);border-radius:6px;background:#fff;color:var(--tx);font-size:12.5px}
+.f input:focus,.f select:focus{outline:none;border-color:var(--p);box-shadow:0 0 0 3px var(--fr)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.err{display:none;margin:0 0 10px;padding:8px 10px;border-radius:6px;background:var(--erb);color:var(--er);font-size:11.5px;font-weight:700}.err.show{display:block}
+.mf2{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.il{list-style:none;margin-bottom:12px;border:1px solid var(--dv);border-radius:9px}
+.il li{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--dv)}
+.il li:last-child{border:0}.il li span{color:var(--tm);font-size:11px}
+.il .none{color:var(--tm);justify-content:center}
+.sum{display:flex;justify-content:space-between;padding:6px 0;font-size:13px}
+.sum.t{border-top:1px solid var(--dv);margin-top:6px;padding-top:10px;font-size:16px;font-weight:800;color:var(--tx)}
+.chk{display:flex;align-items:center;gap:8px;margin:8px 0}.chk input{width:auto;min-height:0}
+.toast{position:fixed;left:50%;bottom:24px;z-index:1100;max-width:calc(100% - 32px);padding:12px 16px;border-radius:9px;background:var(--tx);color:#fff;font-size:12.5px;font-weight:600;opacity:0;pointer-events:none;transform:translate(-50%,16px);transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){body{display:block}aside{position:static;width:100%;height:auto;padding:14px 16px}.nl{display:none}.nav{flex-direction:row;overflow-x:auto;margin:0}.nav a{white-space:nowrap}main{padding:22px 16px 34px}.f2{grid-template-columns:1fr}}
+@media print{aside,.acts,.bar,.ra,.foot,.ov,.toast{display:none!important}body{display:block}main{padding:0}}
+</style>
 </head>
 <body>
+<aside>
+  <div>
+    <div class="logo">Nexa <span>Gestão</span></div>
+    <nav aria-label="Navegação principal">
+      <div class="nl">Plataforma</div>
+      <ul class="nav"><li><a href="../admin_saas.html">Gestão global</a></li></ul>
+      <div class="nl">Restaurante</div>
+      <ul class="nav">
+        <li><a href="dashboard.html">Visão geral</a></li>
+        <li><a href="products.html">Produtos e estoque</a></li>
+        <li><a href="tables.html" class="on" aria-current="page">Mesas e pedidos</a></li>
+        <li><a href="kitchen.html">Cozinha (KDS)</a></li>
+        <li><a href="financial.html">Financeiro</a></li>
+        <li><a href="employees.html">Equipe</a></li>
+      </ul>
+    </nav>
+  </div>
+  <button type="button" class="out" id="btnOut">Sair</button>
+</aside>
 
-    <!-- Sidebar de Navegação -->
-    <aside>
-        <div>
-            <div class="logo">Nexa <span>Gestão</span></div>
-            <ul class="nav-links">
-                <li><a href="../admin_saas.html">Gestão global</a></li>
-                <li><a href="dashboard.html">Visão geral</a></li>
-                <li><a href="products.html">Produtos e estoque</a></li>
-                <li><a href="tables.html" class="active">Mesas e pedidos</a></li>
-                <li><a href="kitchen.html">Cozinha (KDS)</a></li>
-                <li><a href="financial.html">Financeiro</a></li>
-                <li><a href="employees.html">Equipe</a></li>
-            </ul>
-        </div>
-        <button class="logout-btn" onclick="window.location.href='../index.html'">Terminar Sessão</button>
-    </aside>
-
-    <!-- Conteúdo Principal -->
-    <main>
-        <header>
-            <div>
-                <h1 style="margin-bottom: 4px;">Gestão de Mesas e Pedidos</h1>
-                <p style="color: var(--gray); font-size: 14px;">Controle o atendimento de salão, comandas e consumo das mesas.</p>
-            </div>
-            <div class="saas-header-actions">
-                <button class="btn-saas-secondary" onclick="exportTableReport()">
-                    📥 Exportar Relatório
-                </button>
-                <button class="btn-saas-primary" onclick="openTableModal()">
-                    + Abrir Mesa / Comanda
-                </button>
-            </div>
-        </header>
-
-        <!-- Cartões de Métricas de Mesas -->
-        <div class="saas-metrics-grid">
-            <div class="saas-card blue">
-                <div class="saas-card-title">Total de Registos</div>
-                <div class="saas-card-value" id="metricTotalTables">0</div>
-                <div style="font-size: 13px; color: var(--gray);">Mesas e comandas ativas</div>
-            </div>
-            <div class="saas-card orange">
-                <div class="saas-card-title">Mesas Ocupadas</div>
-                <div class="saas-card-value" id="metricOccupiedTables">0</div>
-                <div style="font-size: 13px; color: var(--gray);">Com consumo em aberto</div>
-            </div>
-            <div class="saas-card green">
-                <div class="saas-card-title">Consumo Total Ativo</div>
-                <div class="saas-card-value" id="metricTotalConsumption" style="color: var(--color-success);">R$ 0,00</div>
-                <div style="font-size: 13px; color: var(--gray);">Valor somado em salão</div>
-            </div>
-        </div>
-
-        <!-- Tabela de Mesas -->
-        <div class="saas-table-container">
-            <div class="saas-table-header">
-                <div class="saas-table-title">Controlo de Atendimento</div>
-                <span style="font-size: 13px; color: var(--gray);">Gestão operacional livre</span>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Identificação</th>
-                        <th>Cliente / Responsável</th>
-                        <th>Estado</th>
-                        <th>Consumo Atual</th>
-                        <th style="text-align: right;">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tablesTableBody">
-                    <tr>
-                        <td colspan="5" class="empty-row-state">Nenhuma mesa ou comanda aberta no momento.</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-
-    <!-- Modal para Abrir Mesa / Comanda -->
-    <div class="modal-overlay" id="tableModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <div class="modal-title">Abrir Nova Mesa ou Comanda</div>
-                <button class="modal-close" onclick="closeTableModal()">✕</button>
-            </div>
-            <form id="newTableForm" onsubmit="handleCreateTable(event)">
-                <div class="form-group">
-                    <label>Identificação da Mesa / Comanda</label>
-                    <input type="text" id="tableNameInput" placeholder="Ex: Mesa 05 / Comanda 12" required>
-                </div>
-                <div class="form-group">
-                    <label>Nome do Cliente / Responsável</label>
-                    <input type="text" id="tableClientInput" placeholder="Ex: Mateus Silva" required>
-                </div>
-                <div class="form-group">
-                    <label>Estado Inicial</label>
-                    <select id="tableStatusInput">
-                        <option value="ocupada">Ocupada</option>
-                        <option value="livre">Livre / Disponível</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Consumo Inicial (R$)</label>
-                    <input type="number" step="0.01" id="tableConsumptionInput" placeholder="Ex: 85.50" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-saas-secondary" onclick="closeTableModal()">Cancelar</button>
-                    <button type="submit" class="btn-saas-primary">Registar Mesa</button>
-                </div>
-            </form>
-        </div>
+<main>
+  <header class="head">
+    <div>
+      <h1>Mesas e Comandas</h1>
+      <p class="sub">Abra comandas, lance itens do estoque e feche a conta.</p>
     </div>
+    <div class="acts">
+      <button type="button" class="btn" id="btnCsv">Exportar CSV</button>
+      <button type="button" class="btn pr" id="btnNew">+ Abrir mesa / comanda</button>
+    </div>
+  </header>
 
-    <!-- Ligação ao Script Externo de Mesas -->
-    <script src="../js/tables.js"></script>
+  <section class="metrics" aria-label="Métricas">
+    <div class="card metric" style="--a:var(--p)"><div class="mt">Mesas e comandas</div><div class="mv" id="m1">0</div><div class="mf">Cadastradas</div></div>
+    <div class="card metric" style="--a:var(--wn)"><div class="mt">Ocupadas</div><div class="mv" id="m2">0</div><div class="mf" id="m2f">0 livres</div></div>
+    <div class="card metric" style="--a:var(--ok)"><div class="mt">Consumo em aberto</div><div class="mv" id="m3">R$ 0,00</div><div class="mf">Soma das comandas ocupadas</div></div>
+    <div class="card metric" style="--a:var(--s)"><div class="mt">Consumo médio</div><div class="mv" id="m4">R$ 0,00</div><div class="mf">Por mesa ocupada</div></div>
+  </section>
+
+  <section class="card" aria-label="Atendimento">
+    <div class="bar">
+      <div><label class="sr" for="q">Pesquisar mesa ou cliente</label><input id="q" type="search" placeholder="Pesquisar mesa ou cliente" autocomplete="off"></div>
+      <div class="seg" role="group" aria-label="Filtrar por estado">
+        <button type="button" class="on" data-f="all">Todas</button>
+        <button type="button" data-f="ocupada">Ocupadas</button>
+        <button type="button" data-f="livre">Livres</button>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <caption class="sr">Mesas e comandas com cliente, estado e consumo</caption>
+        <thead><tr><th>Identificação</th><th>Cliente</th><th>Estado</th><th>Consumo atual</th><th class="r">Ações</th></tr></thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+    <div class="empty show" id="empty" role="status"><b id="et">Nenhuma mesa ou comanda aberta</b><span id="ex">Clique em "Abrir mesa / comanda" para começar.</span></div>
+    <div class="foot"><span id="cnt">Nenhuma mesa</span><span id="note" style="color:var(--wn);font-weight:700"></span></div>
+  </section>
+</main>
+
+<!-- Modal: abrir / editar mesa -->
+<div class="ov" id="mTable"><div class="mc" role="dialog" aria-modal="true" aria-labelledby="tTitle">
+  <div class="mh"><h2 id="tTitle">Abrir mesa ou comanda</h2><button type="button" class="x" data-close aria-label="Fechar">✕</button></div>
+  <form id="fTable" novalidate>
+    <p class="err" id="e1" role="alert"></p>
+    <div class="f"><label for="iName">Identificação</label><input id="iName" maxlength="40" autocomplete="off" placeholder="Ex: Mesa 05 / Comanda 12"></div>
+    <div class="f"><label for="iClient">Cliente / responsável</label><input id="iClient" maxlength="60" autocomplete="off" placeholder="Ex: Mateus Silva"></div>
+    <div class="f2">
+      <div class="f"><label for="iPeople">Pessoas</label><input id="iPeople" inputmode="numeric" autocomplete="off" placeholder="Ex: 4"></div>
+      <div class="f"><label for="iStatus">Estado</label><select id="iStatus"><option value="ocupada">Ocupada</option><option value="livre">Livre</option></select></div>
+    </div>
+    <div class="f" id="fInit"><label for="iInit">Consumo inicial (R$) <small>opcional</small></label><input id="iInit" inputmode="decimal" autocomplete="off" placeholder="Ex: 85,50"></div>
+    <div class="mf2"><button type="button" class="btn" data-close>Cancelar</button><button type="submit" class="btn pr" id="tSubmit">Abrir mesa</button></div>
+  </form>
+</div></div>
+
+<!-- Modal: itens da comanda -->
+<div class="ov" id="mItems"><div class="mc" role="dialog" aria-modal="true" aria-labelledby="iTitle">
+  <div class="mh"><h2 id="iTitle">Comanda</h2><button type="button" class="x" data-close aria-label="Fechar">✕</button></div>
+  <ul class="il" id="iList"></ul>
+  <div class="sum t"><span>Subtotal</span><span id="iTotal">R$ 0,00</span></div>
+  <form id="fItem" novalidate style="margin-top:14px">
+    <p class="err" id="e2" role="alert"></p>
+    <div class="f"><label for="iProd">Item</label><select id="iProd"></select></div>
+    <div class="f2" id="avulso" hidden>
+      <div class="f"><label for="aName">Nome do item avulso</label><input id="aName" maxlength="60" autocomplete="off"></div>
+      <div class="f"><label for="aPrice">Preço (R$)</label><input id="aPrice" inputmode="decimal" autocomplete="off" placeholder="Ex: 12,50"></div>
+    </div>
+    <div class="f"><label for="iQty">Quantidade</label><input id="iQty" inputmode="decimal" autocomplete="off" value="1"></div>
+    <div class="mf2"><button type="button" class="btn" data-close>Fechar</button><button type="submit" class="btn pr">Adicionar item</button></div>
+  </form>
+</div></div>
+
+<!-- Modal: fechar conta -->
+<div class="ov" id="mClose"><div class="mc" role="dialog" aria-modal="true" aria-labelledby="cTitle">
+  <div class="mh"><h2 id="cTitle">Fechar conta</h2><button type="button" class="x" data-close aria-label="Fechar">✕</button></div>
+  <p class="err" id="e3" role="alert"></p>
+  <div class="sum"><span>Subtotal</span><span id="cSub">R$ 0,00</span></div>
+  <label class="chk"><input type="checkbox" id="cSvc" checked> Incluir taxa de serviço (10%)</label>
+  <div class="sum"><span>Serviço</span><span id="cSvcV">R$ 0,00</span></div>
+  <div class="sum t"><span>Total</span><span id="cTot">R$ 0,00</span></div>
+  <div class="f2" style="margin-top:14px">
+    <div class="f"><label for="cPpl">Dividir entre (pessoas)</label><input id="cPpl" inputmode="numeric" value="1"></div>
+    <div class="f"><label for="cPay">Pagamento</label><select id="cPay"><option>Dinheiro</option><option>Pix</option><option>Cartão de débito</option><option>Cartão de crédito</option></select></div>
+  </div>
+  <div class="sum"><span>Por pessoa</span><b id="cEach">R$ 0,00</b></div>
+  <div class="mf2"><button type="button" class="btn" data-close>Cancelar</button><button type="button" class="btn pr" id="cOk">Confirmar pagamento</button></div>
+</div></div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+'use strict';
+var KT = 'nexa_tables', KP = 'nexa_products', KS = 'nexa_sales';
+function $(s) { return document.querySelector(s); }
+function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
+function brl(n) { return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }); }
+function fq(n) { return n.toLocaleString('pt-BR', { maximumFractionDigits: 3 }); }
+function r3(n) { return Math.round(n * 1000) / 1000; }
+function r2(n) { return Math.round(n * 100) / 100; }
+function slug(s) { return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
+function parseBR(s) {
+  s = String(s).replace(/\s|R\$/g, ''); if (!s) return NaN;
+  if (s.indexOf(',') > -1) s = s.replace(/\./g, '').replace(',', '.');
+  else if ((s.match(/\./g) || []).length > 1) s = s.replace(/\./g, '');
+  var n = Number(s); return isFinite(n) ? n : NaN;
+}
+
+/* Armazenamento: localStorage, com cópia em memória se o navegador bloquear */
+var mem = {}, ok = true;
+try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch (e) { ok = false; }
+function get(k) { if (!ok) return mem[k] || null; try { return localStorage.getItem(k); } catch (e) { ok = false; return mem[k] || null; } }
+function set(k, v) { mem[k] = v; if (!ok) return; try { localStorage.setItem(k, v); } catch (e) { ok = false; toast('Não foi possível salvar neste navegador.'); } }
+function readArr(k) { try { var a = JSON.parse(get(k) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+
+/* Estado */
+var T = [], uid = 1, filter = 'all', editing = null, cur = null;
+function load() {
+  T = readArr(KT).filter(function (t) { return t && typeof t.name === 'string'; }).map(function (t) {
+    return { id: Number(t.id) || uid++, name: t.name, client: String(t.client || ''), people: Math.max(0, parseInt(t.people, 10) || 0),
+      status: t.status === 'livre' ? 'livre' : 'ocupada', opened: Number(t.opened) || 0,
+      items: (Array.isArray(t.items) ? t.items : []).map(function (i) { return { pid: i.pid == null ? null : Number(i.pid), name: String(i.name), price: Math.max(0, Number(i.price) || 0), qty: Math.max(0, Number(i.qty) || 0), unit: String(i.unit || 'un') }; }) };
+  });
+  uid = T.reduce(function (m, t) { return Math.max(m, t.id); }, 0) + 1;
+}
+function save() { set(KT, JSON.stringify(T)); }
+function sub(t) { return r2(t.items.reduce(function (s, i) { return s + i.price * i.qty; }, 0)); }
+var toastEl = $('#toast'), tt = 0;
+function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('show'); }, 3400); }
+
+/* Estoque: baixa ao lançar, devolução ao remover */
+function stockMove(pid, delta) {
+  if (pid == null) return;
+  var a = readArr(KP), p = a.filter(function (x) { return Number(x.id) === pid; })[0];
+  if (!p) return; p.qty = Math.max(0, r3((Number(p.qty) || 0) + delta)); set(KP, JSON.stringify(a));
+}
+
+/* Tabela */
+function render() {
+  var term = slug($('#q').value), body = $('#tb'), n = 0, occ = T.filter(function (t) { return t.status === 'ocupada'; });
+  var tot = occ.reduce(function (s, t) { return s + sub(t); }, 0);
+  $('#m1').textContent = T.length; $('#m2').textContent = occ.length; $('#m2f').textContent = (T.length - occ.length) + (T.length - occ.length === 1 ? ' livre' : ' livres');
+  $('#m3').textContent = brl(tot); $('#m4').textContent = brl(occ.length ? tot / occ.length : 0);
+  body.textContent = '';
+  T.filter(function (t) {
+    if (filter !== 'all' && t.status !== filter) return false;
+    return !term || slug(t.name + ' ' + t.client).indexOf(term) > -1;
+  }).sort(function (a, b) { return a.name.localeCompare(b.name, 'pt-BR', { numeric: true }); }).forEach(function (t) {
+    n++;
+    var tr = el('tr'), c1 = el('td'), c2 = el('td', '', t.client || '—'), c3 = el('td'), c4 = el('td'), c5 = el('td', 'r'), a = el('div', 'ra');
+    c1.appendChild(el('b', '', t.name));
+    var info = (t.people ? t.people + (t.people === 1 ? ' pessoa' : ' pessoas') : 'sem nº de pessoas') + (t.status === 'ocupada' && t.opened ? ' · aberta às ' + new Date(t.opened).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '');
+    c1.appendChild(el('small', '', info));
+    c3.appendChild(el('span', 'badge ' + (t.status === 'ocupada' ? 'oc' : 'li'), t.status === 'ocupada' ? 'Ocupada' : 'Livre'));
+    c4.appendChild(el('b', '', brl(sub(t)))); c4.appendChild(el('small', '', t.items.length + (t.items.length === 1 ? ' item' : ' itens')));
+    function ab(txt, cls, fn, lbl) { var b = el('button', 'btn sm ' + cls, txt); b.type = 'button'; b.setAttribute('aria-label', lbl + ' ' + t.name); b.addEventListener('click', fn); a.appendChild(b); }
+    if (t.status === 'ocupada') { ab('Comanda', '', function () { openItems(t); }, 'Abrir comanda de'); ab('Fechar conta', 'pr', function () { openClose(t); }, 'Fechar conta de'); }
+    ab('Editar', '', function () { openTable(t); }, 'Editar');
+    ab('Excluir', 'dg', function () { del(t); }, 'Excluir');
+    c5.appendChild(a); [c1, c2, c3, c4, c5].forEach(function (c) { tr.appendChild(c); }); body.appendChild(tr);
+  });
+  var none = T.length === 0;
+  $('#empty').classList.toggle('show', n === 0);
+  $('#et').textContent = none ? 'Nenhuma mesa ou comanda aberta' : 'Nada encontrado';
+  $('#ex').textContent = none ? 'Clique em "Abrir mesa / comanda" para começar.' : 'Ajuste a busca ou o filtro.';
+  $('#cnt').textContent = none ? 'Nenhuma mesa' : 'Mostrando ' + n + ' de ' + T.length;
+}
+function del(t) {
+  if (!window.confirm('Excluir "' + t.name + '"?' + (t.items.length ? ' Os itens voltam ao estoque.' : ''))) return;
+  t.items.forEach(function (i) { stockMove(i.pid, i.qty); });
+  T = T.filter(function (x) { return x !== t; }); save(); render(); toast('"' + t.name + '" excluída.');
+}
+document.querySelectorAll('.seg button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    document.querySelectorAll('.seg button').forEach(function (x) { x.classList.toggle('on', x === b); });
+    filter = b.dataset.f; render();
+  });
+});
+$('#q').addEventListener('input', render);
+
+/* Modais */
+function show(id) { $(id).classList.add('open'); }
+function hide(m) { m.classList.remove('open'); render(); }
+function err(id, msg) { var e = $(id); e.textContent = msg || ''; e.classList.toggle('show', !!msg); }
+document.addEventListener('click', function (e) {
+  var m = e.target.closest('.ov');
+  if (e.target.closest('[data-close]') || e.target.classList.contains('ov')) hide(e.target.closest('.ov'));
+});
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') document.querySelectorAll('.ov.open').forEach(hide); });
+
+/* Abrir / editar mesa */
+function openTable(t) {
+  editing = t || null; err('#e1');
+  $('#tTitle').textContent = t ? 'Editar mesa' : 'Abrir mesa ou comanda'; $('#tSubmit').textContent = t ? 'Salvar' : 'Abrir mesa';
+  $('#iName').value = t ? t.name : ''; $('#iClient').value = t ? t.client : ''; $('#iPeople').value = t && t.people ? t.people : ''; $('#iStatus').value = t ? t.status : 'ocupada';
+  $('#iInit').value = ''; toggleInit();
+  show('#mTable'); setTimeout(function () { $('#iName').focus(); }, 0);
+}
+function toggleInit() { $('#fInit').hidden = !!editing || $('#iStatus').value === 'livre'; }
+$('#iStatus').addEventListener('change', toggleInit);
+$('#btnNew').addEventListener('click', function () { openTable(null); });
+$('#fTable').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var name = $('#iName').value.trim(), client = $('#iClient').value.trim(), st = $('#iStatus').value, pp = $('#iPeople').value.trim() === '' ? 0 : Number($('#iPeople').value);
+  if (!name) return err('#e1', 'Informe a identificação da mesa ou comanda.');
+  if (T.some(function (x) { return x !== editing && slug(x.name) === slug(name); })) return err('#e1', 'Já existe uma mesa ou comanda com essa identificação.');
+  if (st === 'ocupada' && !client) return err('#e1', 'Informe o cliente ou responsável.');
+  if (!isFinite(pp) || pp < 0 || pp % 1 !== 0) return err('#e1', 'Número de pessoas inválido.');
+  if (editing && st === 'livre' && editing.items.length) return err('#e1', 'Feche a conta ou remova os itens antes de liberar a mesa.');
+  var init = 0, iv = $('#iInit').value.trim();
+  if (!editing && st === 'ocupada' && iv !== '') { init = parseBR(iv); if (isNaN(init) || init < 0) return err('#e1', 'Consumo inicial inválido (ex: 85,50).'); }
+  if (editing) {
+    if (editing.status === 'livre' && st === 'ocupada') editing.opened = Date.now();
+    editing.name = name; editing.client = st === 'livre' ? '' : client; editing.people = st === 'livre' ? 0 : pp; editing.status = st; toast('"' + name + '" atualizada.');
+  } else { T.push({ id: uid++, name: name, client: st === 'livre' ? '' : client, people: st === 'livre' ? 0 : pp, status: st, opened: st === 'ocupada' ? Date.now() : 0, items: init > 0 ? [{ pid: null, name: 'Consumo inicial', price: r2(init), qty: 1, unit: 'un' }] : [] }); toast('"' + name + '" cadastrada.'); }
+  save(); hide($('#mTable'));
+});
+
+/* Itens da comanda */
+function fillProducts() {
+  var s = $('#iProd'); s.textContent = '';
+  readArr(KP).filter(function (p) { return p.type === 'venda' && Number(p.qty) > 0; })
+    .sort(function (a, b) { return String(a.name).localeCompare(String(b.name), 'pt-BR'); })
+    .forEach(function (p) { var o = el('option', '', p.name + ' — ' + brl(Number(p.price) || 0) + ' (' + fq(Number(p.qty)) + ' ' + (p.unit || 'un') + ')'); o.value = p.id; s.appendChild(o); });
+  var o = el('option', '', 'Item avulso (sem baixa no estoque)'); o.value = ''; s.appendChild(o);
+  $('#avulso').hidden = s.value !== '';
+}
+$('#iProd').addEventListener('change', function () { $('#avulso').hidden = this.value !== ''; });
+function renderItems() {
+  var ul = $('#iList'); ul.textContent = '';
+  if (!cur.items.length) ul.appendChild(el('li', 'none', 'Nenhum item lançado.'));
+  cur.items.forEach(function (i, k) {
+    var li = el('li'), d = el('div'); d.appendChild(el('b', '', fq(i.qty) + ' ' + i.unit + ' × ' + i.name)); d.appendChild(el('span', '', brl(i.price) + ' cada · ' + brl(r2(i.price * i.qty))));
+    var b = el('button', 'btn sm dg', 'Remover'); b.type = 'button'; b.setAttribute('aria-label', 'Remover ' + i.name);
+    b.addEventListener('click', function () { stockMove(i.pid, i.qty); cur.items.splice(k, 1); save(); fillProducts(); renderItems(); });
+    li.appendChild(d); li.appendChild(b); ul.appendChild(li);
+  });
+  $('#iTotal').textContent = brl(sub(cur));
+}
+function openItems(t) { cur = t; err('#e2'); $('#iTitle').textContent = 'Comanda — ' + t.name; $('#iQty').value = '1'; $('#aName').value = ''; $('#aPrice').value = ''; fillProducts(); renderItems(); show('#mItems'); }
+$('#fItem').addEventListener('submit', function (e) {
+  e.preventDefault(); err('#e2');
+  var qty = parseBR($('#iQty').value), pid = $('#iProd').value;
+  if (isNaN(qty) || qty <= 0) return err('#e2', 'Informe uma quantidade maior que zero.');
+  var item;
+  if (pid === '') {
+    var nm = $('#aName').value.trim(), pr = parseBR($('#aPrice').value);
+    if (!nm) return err('#e2', 'Informe o nome do item avulso.');
+    if (isNaN(pr) || pr < 0) return err('#e2', 'Informe um preço válido (ex: 12,50).');
+    if (qty % 1 !== 0) return err('#e2', 'Item avulso: use quantidade inteira.');
+    item = { pid: null, name: nm, price: r2(pr), qty: qty, unit: 'un' };
+  } else {
+    var p = readArr(KP).filter(function (x) { return String(x.id) === pid; })[0];
+    if (!p) return err('#e2', 'Produto não encontrado no estoque.');
+    if ((p.unit || 'un') === 'un' && qty % 1 !== 0) return err('#e2', 'Este produto é vendido por unidade: use número inteiro.');
+    if (qty > Number(p.qty)) return err('#e2', 'Estoque insuficiente: disponível ' + fq(Number(p.qty)) + ' ' + (p.unit || 'un') + '.');
+    item = { pid: Number(p.id), name: p.name, price: Number(p.price) || 0, qty: r3(qty), unit: p.unit || 'un' };
+    stockMove(item.pid, -item.qty);
+  }
+  var same = item.pid != null ? cur.items.filter(function (i) { return i.pid === item.pid; })[0] : null;
+  if (same) same.qty = r3(same.qty + item.qty); else cur.items.push(item);
+  save(); $('#iQty').value = '1'; $('#aName').value = ''; $('#aPrice').value = ''; fillProducts(); renderItems();
+});
+
+/* Fechar conta */
+function calc() {
+  var s = sub(cur), sv = $('#cSvc').checked ? r2(s * 0.1) : 0, tot = r2(s + sv), pp = Number($('#cPpl').value);
+  $('#cSub').textContent = brl(s); $('#cSvcV').textContent = brl(sv); $('#cTot').textContent = brl(tot);
+  $('#cEach').textContent = brl(isFinite(pp) && pp >= 1 ? r2(tot / Math.floor(pp)) : tot);
+  return { s: s, sv: sv, tot: tot };
+}
+function openClose(t) {
+  cur = t; err('#e3'); $('#cTitle').textContent = 'Fechar conta — ' + t.name; $('#cSvc').checked = true; $('#cPpl').value = t.people || 1; $('#cPay').selectedIndex = 0; calc(); show('#mClose');
+}
+$('#cSvc').addEventListener('change', calc); $('#cPpl').addEventListener('input', calc);
+$('#cOk').addEventListener('click', function () {
+  if (!cur.items.length) return err('#e3', 'A comanda está sem itens.');
+  var v = calc(), sales = readArr(KS);
+  sales.push({ date: new Date().toISOString(), table: cur.name, client: cur.client, subtotal: v.s, service: v.sv, total: v.tot, method: $('#cPay').value });
+  set(KS, JSON.stringify(sales));
+  cur.items = []; cur.status = 'livre'; cur.client = ''; cur.people = 0; cur.opened = 0; save();
+  var nm = cur.name; hide($('#mClose')); toast('Conta de "' + nm + '" fechada: ' + brl(v.tot) + '. Mesa liberada.');
+});
+
+/* CSV */
+function csvCell(v) { var s = String(v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[;"\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+$('#btnCsv').addEventListener('click', function () {
+  var rows = [['Identificação', 'Cliente', 'Pessoas', 'Estado', 'Itens', 'Consumo (R$)']];
+  T.slice().sort(function (a, b) { return a.name.localeCompare(b.name, 'pt-BR', { numeric: true }); }).forEach(function (t) {
+    rows.push([t.name, t.client, t.people, t.status === 'ocupada' ? 'Ocupada' : 'Livre', t.items.map(function (i) { return fq(i.qty) + 'x ' + i.name; }).join(', '), sub(t).toLocaleString('pt-BR', { minimumFractionDigits: 2 })]);
+  });
+  var blob = new Blob(['\uFEFF' + rows.map(function (r) { return r.map(csvCell).join(';'); }).join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a'), d = new Date(); a.href = URL.createObjectURL(blob);
+  a.download = 'mesas-nexa-gestao-' + d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + '.csv';
+  document.body.appendChild(a); a.click(); a.remove(); toast('Arquivo CSV gerado.');
+});
+
+$('#btnOut').addEventListener('click', function () { window.location.href = '../index.html'; });
+load(); render();
+if (!ok) $('#note').textContent = 'Armazenamento bloqueado: os dados ficam só nesta aba. Abra o arquivo direto no Chrome ou Edge.';
+})();
+</script>
 </body>
 </html>
