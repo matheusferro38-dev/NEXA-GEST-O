@@ -35,6 +35,7 @@ h1{font-size:22px;font-weight:800}.sub{margin-top:4px;color:var(--tm);font-size:
 .btn:hover{border-color:var(--p);background:var(--hv)}
 .btn.pr{background:var(--p);border-color:var(--p);color:#fff}.btn.pr:hover{background:var(--ph)}
 .btn.sm{min-height:30px;padding:4px 10px;font-size:11px}.btn.dg:hover{border-color:var(--er);background:var(--erb);color:var(--er)}
+.btn.dgs{background:var(--er);border-color:var(--er);color:#fff}.btn.dgs:hover{background:#8a2b28;border-color:#8a2b28}.btn.dgs:disabled{opacity:.45;cursor:not-allowed}
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
 .pb{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:12px 16px;margin-bottom:14px}
 .pb label{color:var(--t2);font-size:11.5px;font-weight:700}.pb .cmp{margin-left:auto;color:var(--tm);font-size:11.5px}
@@ -82,6 +83,11 @@ table.tb{width:100%;min-width:820px;border-collapse:collapse}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .chk{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-weight:700;color:var(--t2)}.chk input{width:auto;min-height:0}
 .err{display:none;margin:0 0 10px;padding:8px 10px;border-radius:6px;background:var(--erb);color:var(--er);font-size:11.5px;font-weight:700}.err.show{display:block}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;margin-bottom:8px;border:1px solid var(--bd);border-radius:8px;cursor:pointer;color:var(--t2);font-size:12.5px;font-weight:700}
+.opt:hover{background:var(--hv)}.opt input{margin-top:2px;width:auto;min-height:0;accent-color:var(--p)}
+.opt small{display:block;margin-top:2px;color:var(--tm);font-size:11px;font-weight:600}
+.opt.dis{opacity:.5;cursor:not-allowed}.opt.dis:hover{background:none}
+.wb{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:10px 12px;margin:12px 0;border-radius:8px;background:var(--wnb);color:var(--wn);font-size:11.5px;font-weight:700}
 .mf2{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 .toast{position:fixed;left:50%;bottom:24px;z-index:1100;max-width:calc(100% - 32px);padding:12px 16px;border-radius:9px;background:var(--tx);color:#fff;font-size:12.5px;font-weight:600;opacity:0;pointer-events:none;transform:translate(-50%,16px);transition:opacity .25s,transform .25s}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:1100px){.r2{grid-template-columns:1fr}}
@@ -107,6 +113,7 @@ table.tb{width:100%;min-width:820px;border-collapse:collapse}
  <symbol id="i-trend-d" viewBox="0 0 24 24"><path d="m22 17-8.5-8.5-5 5L2 7M16 17h6v-6"/></symbol>
  <symbol id="i-pct" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3"/></symbol>
+ <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M10 11v6M14 11v6"/></symbol>
 </svg>
 <aside>
   <div>
@@ -140,6 +147,7 @@ table.tb{width:100%;min-width:820px;border-collapse:collapse}
       <input type="file" id="fileImp" accept="application/json,.json" hidden>
       <button type="button" class="btn" id="btnPrint"><svg class="icon" aria-hidden="true"><use href="#i-print"/></svg>Imprimir / PDF</button>
       <button type="button" class="btn" id="btnCsv"><svg class="icon" aria-hidden="true"><use href="#i-down"/></svg>CSV</button>
+      <button type="button" class="btn dg" id="btnClear"><svg class="icon" aria-hidden="true"><use href="#i-trash"/></svg>Limpar valores</button>
       <button type="button" class="btn pr" id="btnNew"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Nova transação</button>
     </div>
   </header>
@@ -209,6 +217,19 @@ table.tb{width:100%;min-width:820px;border-collapse:collapse}
       </div>
     </div>
     <div class="mf2"><button type="button" class="btn" data-close>Cancelar</button><button type="submit" class="btn pr" id="mOk">Registrar</button></div>
+  </form>
+</div></div>
+
+<div class="ov" id="modClear"><div class="mc" role="dialog" aria-modal="true" aria-labelledby="cT">
+  <div class="mh"><h2 id="cT">Limpar valores</h2><button type="button" class="x" data-close aria-label="Fechar">✕</button></div>
+  <form id="formClear" novalidate>
+    <p class="sub" style="margin:0 0 12px">Escolha o que remover. Esta ação não pode ser desfeita.</p>
+    <label class="opt" id="oL1"><input type="radio" name="scope" value="shown"><span id="oT1"></span></label>
+    <label class="opt" id="oL2"><input type="radio" name="scope" value="manual"><span id="oT2"></span></label>
+    <label class="opt" id="oL3"><input type="radio" name="scope" value="all"><span id="oT3"></span></label>
+    <div class="wb"><span>Recomendado: faça um backup antes de apagar.</span><button type="button" class="btn sm" id="btnBk2">Fazer backup agora</button></div>
+    <label class="chk"><input type="checkbox" id="cOk"> Entendi que os valores removidos não podem ser recuperados</label>
+    <div class="mf2"><button type="button" class="btn" data-close>Cancelar</button><button type="submit" class="btn dgs" id="cGo" disabled>Remover valores</button></div>
   </form>
 </div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -428,9 +449,10 @@ function openMod(x) {
 $('#iKind').addEventListener('change', function () { fillCats(this.value); $('#xDesp').hidden = this.value !== 'despesa'; });
 $('#iCat').addEventListener('change', function () { $('#fNew').hidden = this.value !== '__new'; if (this.value === '__new') $('#iNew').focus(); });
 function closeMod() { $('#mod').classList.remove('open'); }
+function closeAll() { document.querySelectorAll('.ov.open').forEach(function (o) { o.classList.remove('open'); }); }
 $('#btnNew').addEventListener('click', function () { openMod(null); });
-document.addEventListener('click', function (e) { if (e.target.closest('[data-close]') || e.target === $('#mod')) closeMod(); });
-document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMod(); });
+document.addEventListener('click', function (e) { if (e.target.closest('[data-close]') || (e.target.classList && e.target.classList.contains('ov'))) closeAll(); });
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeAll(); });
 $('#form').addEventListener('submit', function (e) {
   e.preventDefault();
   var kind = $('#iKind').value, desc = $('#iDesc').value.trim(), val = parseBR($('#iVal').value), cat = $('#iCat').value, dt = $('#iDate').value, st = $('#iSt').value;
@@ -445,6 +467,41 @@ $('#form').addEventListener('submit', function (e) {
   else { it = Object.assign({ id: uid++, pid: pid, pqty: pid != null ? r3(pq) : 0, stocked: false, nextDone: false }, d); F.push(it); }
   if (it.status === 'pago') afterPaid(it);
   save(); closeMod(); render(); toast(editing ? 'Transação atualizada.' : 'Transação registrada.');
+});
+
+/* Limpar valores (remoção em massa) */
+var cLast = null;
+function clearCounts() { return { shown: shown.filter(function (x) { return !x.auto; }).length, manual: F.length, sales: readArr(KS).length }; }
+function syncClear() {
+  var r = document.querySelector('input[name=scope]:checked'); $('#cGo').disabled = !(r && !r.disabled && $('#cOk').checked);
+}
+function openClear() {
+  var c = clearCounts(); cLast = document.activeElement;
+  var rows = [['1', 'shown', c.shown, 'Somente as transações exibidas na tabela (' + c.shown + ')', 'Respeita o período e os filtros atuais. Vendas vindas das mesas não entram aqui.'],
+              ['2', 'manual', c.manual, 'Todos os lançamentos manuais (' + c.manual + ')', 'Receitas e despesas que você cadastrou, de qualquer período. Mantém as vendas das mesas.'],
+              ['3', 'all', c.manual + c.sales, 'Tudo: lançamentos manuais e vendas das mesas (' + c.manual + ' + ' + c.sales + ')', 'Zera também as vendas registradas nas mesas, o que afeta o ticket médio e o fechamento de caixa.']];
+  var first = null;
+  rows.forEach(function (r) {
+    var lab = $('#oL' + r[0]), inp = lab.querySelector('input'), span = $('#oT' + r[0]);
+    span.textContent = r[3]; var sm = el('small', '', r[4]); span.appendChild(sm);
+    inp.disabled = r[2] === 0; inp.checked = false; lab.classList.toggle('dis', r[2] === 0);
+    if (!first && r[2] > 0) first = inp;
+  });
+  if (first) first.checked = true; $('#cOk').checked = false; syncClear(); $('#modClear').classList.add('open');
+  setTimeout(function () { (first || $('#cOk')).focus(); }, 0);
+}
+$('#btnClear').addEventListener('click', openClear);
+$('#formClear').addEventListener('change', syncClear);
+$('#btnBk2').addEventListener('click', function () { $('#btnBk').click(); });
+$('#formClear').addEventListener('submit', function (e) {
+  e.preventDefault(); var r = document.querySelector('input[name=scope]:checked'); if (!r || !$('#cOk').checked) return;
+  var rm = r.value === 'shown' ? shown.filter(function (x) { return !x.auto; }) : F.slice(), nSales = 0, nStock = 0;
+  rm.forEach(function (x) { if (x.stocked) { stockAdd(x.pid, -x.pqty); nStock++; } });
+  F = F.filter(function (x) { return rm.indexOf(x) < 0; });
+  if (r.value === 'all') { nSales = readArr(KS).length; set(KS, '[]'); }
+  save(); closeAll(); render();
+  toast('Valores removidos: ' + rm.length + (rm.length === 1 ? ' lançamento' : ' lançamentos') + (nSales ? ' e ' + nSales + (nSales === 1 ? ' venda' : ' vendas') : '') + (nStock ? '. Entradas de estoque desfeitas: ' + nStock : '') + '.');
+  if (cLast && cLast.focus) cLast.focus();
 });
 
 /* Exportar, imprimir e backup */
