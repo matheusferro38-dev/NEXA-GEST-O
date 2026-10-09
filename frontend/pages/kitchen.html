@@ -38,7 +38,6 @@ h1{font-size:22px;font-weight:800}.sub{margin-top:4px;color:var(--tm);font-size:
 .btn.pr{background:var(--p);border-color:var(--p);color:#fff}.btn.pr:hover{background:var(--ph)}
 .btn.sm{min-height:32px;padding:5px 10px;font-size:11px}
 .btn.dg:hover{border-color:var(--er);background:var(--erb);color:var(--er)}
-.btn[aria-pressed=true]{background:var(--pl);border-color:var(--p);color:var(--p)}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:18px}
 .card{background:var(--sf);border:1px solid var(--bd);border-radius:12px;box-shadow:var(--sh);overflow:hidden}
 .metric{padding:18px 20px;border-left:3px solid var(--a)}
@@ -68,6 +67,7 @@ h1{font-size:22px;font-weight:800}.sub{margin-top:4px;color:var(--tm);font-size:
 table{width:100%;min-width:640px;border-collapse:collapse}
 th{padding:11px 18px;background:var(--sf2);color:var(--tm);font-size:9.5px;font-weight:800;letter-spacing:.7px;text-align:left;text-transform:uppercase;border-bottom:1px solid var(--dv)}
 td{padding:11px 18px;border-bottom:1px solid var(--dv);color:var(--t2);font-size:12px}tbody tr:last-child td{border:0}
+.ra{display:flex;gap:6px;flex-wrap:wrap}
 .ch{padding:14px 18px;font-weight:800;font-size:13px;border-bottom:1px solid var(--dv)}.ch small{color:var(--tm);font-weight:600}
 .bd{display:inline-flex;padding:4px 10px;border-radius:20px;font-size:10.5px;font-weight:800;background:var(--okb);color:var(--ok)}.bd.c{background:var(--erb);color:var(--er)}
 .ov{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto;background:rgba(13,32,48,.48)}
@@ -98,17 +98,12 @@ td{padding:11px 18px;border-bottom:1px solid var(--dv);color:var(--t2);font-size
  <symbol id="i-chef" viewBox="0 0 24 24"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6zM6 17h12"/></symbol>
  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
- <symbol id="i-down" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></symbol>
  <symbol id="i-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></symbol>
- <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></symbol>
  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3"/></symbol>
  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
- <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol>
- <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
- <symbol id="i-vol" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
 </svg>
- 
+
 <aside>
   <div>
     <div class="logo">Nexa <span>Gestão</span></div>
@@ -131,7 +126,7 @@ td{padding:11px 18px;border-bottom:1px solid var(--dv);color:var(--t2);font-size
     <button type="button" class="out" id="btnOut"><svg class="icon" aria-hidden="true"><use href="#i-out"/></svg> Sair</button>
   </div>
 </aside>
- 
+
 <main>
   <header class="head">
     <div>
@@ -139,35 +134,34 @@ td{padding:11px 18px;border-bottom:1px solid var(--dv);color:var(--t2);font-size
       <p class="sub">Pedidos em preparo, com tempo de espera atualizado automaticamente.</p>
     </div>
     <div class="acts">
-      <button type="button" class="btn" id="btnSnd" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-vol"/></svg><span id="sndT">Som: desligado</span></button>
-      <button type="button" class="btn" id="btnFs"><svg class="icon" aria-hidden="true"><use href="#i-max"/></svg>Tela cheia</button>
       <button type="button" class="btn pr" id="btnNew"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Novo pedido</button>
     </div>
   </header>
- 
+
   <section class="metrics" aria-label="Métricas">
     <div class="card metric" style="--a:#d9a01e"><div class="top"><div class="mt">Em preparo</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-chef"/></svg></span></div><div class="mv" id="m1">0</div><div class="mf">Na chapa / cozinha</div></div>
     <div class="card metric" style="--a:var(--ok)"><div class="top"><div class="mt">Prontos</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span></div><div class="mv" id="m2">0</div><div class="mf">Aguardando entrega</div></div>
     <div class="card metric" style="--a:var(--p)"><div class="top"><div class="mt">Total na fila</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg></span></div><div class="mv" id="m3">0</div><div class="mf" id="m3f">Pedido mais antigo: —</div></div>
     <div class="card metric" style="--a:var(--s)"><div class="top"><div class="mt">Tempo médio até ficar pronto</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span></div><div class="mv" id="m4">—</div><div class="mf">Últimos 20 pedidos prontos</div></div>
   </section>
- 
+
   <section class="board" aria-label="Fila de produção">
     <div class="col"><h2>Novos <em id="n1">0</em></h2><div class="cards" id="c1"></div></div>
     <div class="col"><h2>Em preparo <em id="n2">0</em></h2><div class="cards" id="c2"></div></div>
     <div class="col"><h2>Prontos <em id="n3">0</em></h2><div class="cards" id="c3"></div></div>
   </section>
- 
+
   <section class="card" id="hist" hidden>
     <div class="ch">Histórico <small>(últimos 15 entregues ou cancelados)</small></div>
     <div class="scroll"><table>
-      <thead><tr><th>Pedido</th><th>Origem</th><th>Itens</th><th>Resultado</th><th>Tempo total</th><th>Ação</th></tr></thead>
+      <caption class="sr">Pedidos entregues ou cancelados</caption>
+      <thead><tr><th>Pedido</th><th>Origem</th><th>Itens</th><th>Resultado</th><th>Tempo total</th><th>Ações</th></tr></thead>
       <tbody id="hb"></tbody>
     </table></div>
   </section>
   <p class="sub" id="note" style="color:var(--wn);font-weight:700;margin-top:10px"></p>
 </main>
- 
+
 <div class="ov" id="mod"><div class="mc" role="dialog" aria-modal="true" aria-labelledby="mT">
   <div class="mh"><h2 id="mT">Novo pedido</h2><button type="button" class="x" data-close aria-label="Fechar">✕</button></div>
   <form id="form" novalidate>
@@ -181,7 +175,7 @@ td{padding:11px 18px;border-bottom:1px solid var(--dv);color:var(--t2);font-size
   </form>
 </div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
- 
+
 <script>
 (function () {
 'use strict';
@@ -189,14 +183,14 @@ var KEY = 'nexa_kitchen', LIMIT = 15;
 function $(s) { return document.querySelector(s); }
 function el(t, c, x) { var e = document.createElement(t); if (c) e.className = c; if (x != null) e.textContent = x; return e; }
 var ST = { novo: 'Novo', preparo: 'Em preparo', pronto: 'Pronto', entregue: 'Entregue', cancelado: 'Cancelado' };
- 
+
 /* Armazenamento */
 var mem = {}, ok = true;
 try { localStorage.setItem('__t', '1'); localStorage.removeItem('__t'); } catch (e) { ok = false; }
 function get() { if (!ok) return mem[KEY] || null; try { return localStorage.getItem(KEY); } catch (e) { ok = false; return mem[KEY] || null; } }
 function set(v) { mem[KEY] = v; if (!ok) return; try { localStorage.setItem(KEY, v); } catch (e) { ok = false; toast('Não foi possível salvar neste navegador.'); } }
- 
-var O = [], editing = null, sound = false, lastNew = -1;
+
+var O = [], editing = null;
 function load() {
   try { var a = JSON.parse(get() || '[]'); O = Array.isArray(a) ? a : []; } catch (e) { O = []; }
   O = O.filter(function (o) { return o && ST[o.status]; }).map(function (o) {
@@ -210,7 +204,7 @@ var toastEl = $('#toast'), tt = 0;
 function toast(m) { toastEl.textContent = m; toastEl.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove('show'); }, 3200); }
 function mins(from) { return Math.max(0, Math.floor((Date.now() - from) / 60000)); }
 function fm(m) { return m < 1 ? 'agora' : m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; }
- 
+
 /* Ações do fluxo */
 function advance(o) {
   var now = Date.now();
@@ -225,7 +219,11 @@ function back(o) {
 }
 function cancel(o) { if (!window.confirm('Cancelar o pedido #' + o.num + '?')) return; o.status = 'cancelado'; o.done = Date.now(); save(); render(); toast('Pedido #' + o.num + ' cancelado.'); }
 function reopen(o) { o.status = o.status === 'entregue' ? 'pronto' : 'novo'; o.done = 0; save(); render(); }
- 
+function removeFromHistory(o) {
+  if (!window.confirm('Remover o pedido #' + o.num + ' do histórico? Esta ação não pode ser desfeita.')) return;
+  O = O.filter(function (x) { return x !== o; }); save(); render(); toast('Pedido #' + o.num + ' removido do histórico.');
+}
+
 /* Tela */
 var NEXT = { novo: 'Iniciar preparo', preparo: 'Marcar como pronto', pronto: 'Entregue' };
 function ticket(o) {
@@ -264,14 +262,15 @@ function render() {
   hist.sort(function (a, b) { return b.done - a.done; }); hist = hist.slice(0, 15);
   $('#hist').hidden = !hist.length; var hb = $('#hb'); hb.textContent = '';
   hist.forEach(function (o) {
-    var tr = el('tr'), c = el('td'), r = el('td'), ac = el('td'), rb = el('button', 'btn sm', 'Reabrir'); rb.type = 'button'; rb.addEventListener('click', function () { reopen(o); });
-    c.textContent = ''; r.appendChild(el('span', 'bd' + (o.status === 'cancelado' ? ' c' : ''), ST[o.status])); ac.appendChild(rb);
+    var tr = el('tr'), r = el('td'), ac = el('td'), box = el('div', 'ra');
+    var rb = el('button', 'btn sm', 'Reabrir'); rb.type = 'button'; rb.setAttribute('aria-label', 'Reabrir pedido ' + o.num); rb.addEventListener('click', function () { reopen(o); });
+    var db = el('button', 'btn sm dg', 'Excluir'); db.type = 'button'; db.setAttribute('aria-label', 'Excluir pedido ' + o.num + ' do histórico'); db.addEventListener('click', function () { removeFromHistory(o); });
+    r.appendChild(el('span', 'bd' + (o.status === 'cancelado' ? ' c' : ''), ST[o.status])); box.appendChild(rb); box.appendChild(db); ac.appendChild(box);
     tr.appendChild(el('td', '', '#' + o.num)); tr.appendChild(el('td', '', o.origin)); tr.appendChild(el('td', '', o.items.join(', '))); tr.appendChild(r);
     tr.appendChild(el('td', '', fm(Math.max(0, Math.floor(((o.done || o.created) - o.created) / 60000))))); tr.appendChild(ac); hb.appendChild(tr);
   });
-  return by.novo.length;
 }
- 
+
 /* Modal */
 function err(m) { var e = $('#er'); e.textContent = m || ''; e.classList.toggle('show', !!m); }
 function openMod(o) {
@@ -296,26 +295,18 @@ $('#form').addEventListener('submit', function (e) {
     var st = $('#iSt').value, now = Date.now(), n = nextNum();
     O.push({ id: now, num: n, origin: org, items: items, note: note, urgent: urg, status: st, created: now, started: st === 'preparo' ? now : 0, ready: 0, done: 0 }); toast('Pedido #' + n + ' enviado para a cozinha.');
   }
-  save(); closeMod(); lastNew = render();
+  save(); closeMod(); render();
 });
- 
-/* Som, tela cheia, atualização automática */
-function beep() {
-  try { var C = window.AudioContext || window.webkitAudioContext, c = new C(), o = c.createOscillator(), g = c.createGain(); o.connect(g); g.connect(c.destination); o.frequency.value = 880; g.gain.value = .15; o.start(); setTimeout(function () { o.stop(); c.close(); }, 250); } catch (e) { }
-}
-$('#btnSnd').addEventListener('click', function () { sound = !sound; this.setAttribute('aria-pressed', sound); $('#sndT').textContent = 'Som: ' + (sound ? 'ligado' : 'desligado'); if (sound) beep(); });
-$('#btnFs').addEventListener('click', function () {
-  if (document.fullscreenElement) document.exitFullscreen(); else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
-});
-window.addEventListener('storage', function (e) {   // pedido criado em outra aba
-  if (e.key !== KEY) return; load(); var n = render(); if (sound && n > lastNew) beep(); lastNew = n;
+
+/* Atualização automática */
+window.addEventListener('storage', function (e) {   // pedido criado ou alterado em outra aba
+  if (e.key !== KEY) return; load(); render();
 });
 setInterval(render, 15000);
 $('#btnOut').addEventListener('click', function () { window.location.href = '../index.html'; });
-load(); lastNew = render();
+load(); render();
 if (!ok) $('#note').textContent = 'Armazenamento bloqueado: os pedidos ficam só nesta aba. Abra o arquivo direto no Chrome ou Edge.';
 })();
 </script>
 </body>
 </html>
- 
