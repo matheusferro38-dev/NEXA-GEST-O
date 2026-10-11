@@ -24,7 +24,7 @@ body{display:flex;min-height:100vh;background:var(--color-background);color:var(
 button{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--color-focus-ring);outline-offset:2px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-
+ 
 /* ===== Sidebar ===== */
 aside{position:sticky;top:0;width:256px;min-width:256px;height:100vh;padding:24px 14px 16px;background:var(--color-surface);border-right:1px solid var(--color-divider);display:flex;flex-direction:column;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px;padding:0 8px;margin-bottom:28px;font-size:19px;font-weight:800}
@@ -43,7 +43,7 @@ aside{position:sticky;top:0;width:256px;min-width:256px;height:100vh;padding:24p
 .user-chip b{display:block;font-size:12px}.user-chip small{color:var(--color-text-muted);font-size:11px}
 .logout-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:1px solid transparent;border-radius:var(--radius-md);background:transparent;color:var(--color-danger);font-size:12.5px;font-weight:700;transition:var(--transition)}
 .logout-btn:hover{background:var(--color-danger-bg)}
-
+ 
 /* ===== Main ===== */
 main{flex:1;min-width:0;padding:30px 36px 44px}
 .page-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid var(--color-divider)}
@@ -58,7 +58,7 @@ h1{font-size:22px;font-weight:800}
 .btn.primary:hover{background:var(--color-primary-hover);box-shadow:var(--shadow-md)}
 .btn.primary::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.28) 50%,transparent 70%);transform:translateX(-120%);pointer-events:none}
 .btn.primary:hover::after{transform:translateX(120%);transition:transform .7s ease}
-
+ 
 /* Métricas */
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr));gap:14px;margin-bottom:16px}
 .card{position:relative;overflow:hidden;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);transition:transform var(--transition),box-shadow var(--transition)}
@@ -73,7 +73,7 @@ h1{font-size:22px;font-weight:800}
 .m-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;min-height:28px;color:var(--color-text-muted);font-size:11.5px}
 .spark{width:78px;height:28px}
 .spark path{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
+ 
 /* Gráficos */
 .row2{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:14px;margin-bottom:16px}
 .panel{padding:20px}
@@ -90,7 +90,7 @@ h1{font-size:22px;font-weight:800}
 .plan-row .t{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;font-weight:700;color:var(--color-text-secondary)}
 .bar{height:8px;border-radius:8px;background:var(--color-background-alt);overflow:hidden}
 .bar i{display:block;height:100%;width:0;border-radius:8px;background:var(--c);transition:width 1s var(--ease)}
-
+ 
 /* Tabela */
 .toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid var(--color-divider)}
 .search{position:relative;flex:1;min-width:min(100%,260px);max-width:360px}
@@ -129,7 +129,7 @@ tbody tr:last-child td{border-bottom:0}
 .empty b{font-size:14px}.empty p{color:var(--color-text-muted);font-size:12px;max-width:340px}
 .empty .btn{margin-top:10px}
 .foot{display:flex;justify-content:space-between;padding:12px 20px;border-top:1px solid var(--color-divider);color:var(--color-text-muted);font-size:11.5px}
-
+ 
 /* Modal + toast */
 .modal-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto;background:var(--color-overlay);backdrop-filter:blur(3px)}
 .modal-overlay.open{display:flex}
@@ -149,12 +149,12 @@ tbody tr:last-child td{border-bottom:0}
 .modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
 .toast{position:fixed;left:50%;bottom:24px;z-index:1100;max-width:calc(100% - 32px);padding:12px 16px;border-radius:var(--radius-md);background:var(--color-text);color:#fff;font-size:12.5px;font-weight:650;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transform:translate(-50%,16px);transition:opacity .25s ease,transform .3s var(--ease)}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-
+ 
 /* ===== Responsivo ===== */
 @media(max-width:1100px){aside{width:220px;min-width:220px}main{padding:26px 22px 36px}.row2{grid-template-columns:1fr}}
 @media(max-width:760px){body{display:block}aside{position:static;width:100%;height:auto;gap:12px;padding:14px 16px}.nav-group{margin:0}.nav-label,.user-chip{display:none}.nav-links{flex-direction:row;overflow-x:auto}.nav-links li{flex:none}.nav-links a{white-space:nowrap}.nav-links a.active::before{display:none}.side-foot{align-items:flex-end}.logout-btn{width:auto}main{padding:22px 16px 34px}.metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.metrics{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}.modal-foot{flex-direction:column-reverse}.modal-foot .btn{justify-content:center}}
-
+ 
 /* ===== Animações ===== */
 @keyframes up{from{opacity:0;transform:translateY(16px)}}
 @keyframes slide{from{opacity:0;transform:translateX(-14px)}}
@@ -185,7 +185,7 @@ tbody tr:last-child td{border-bottom:0}
  .modal-overlay.open .modal-card{animation:pop .3s var(--ease)}
 }
 @media(prefers-reduced-motion:reduce){.bar i,.toast{transition:none}}
-
+ 
 /* ===== Impressão (alternativa quando o gerador de PDF não carrega) ===== */
 @media print{
  body{display:block;background:#fff}
@@ -195,7 +195,7 @@ tbody tr:last-child td{border-bottom:0}
  .metric,.row2 .card,.tablecard,.page-head{animation:none!important}
  table{min-width:0}
 }
-
+ 
 /* ===== Específico do dashboard ===== */
 :root{--color-warning:#765200;--color-warning-bg:#faf1dc}
 .skip-link{position:absolute;left:8px;top:-48px;z-index:2000;padding:8px 14px;background:#fff;color:#000;border-radius:6px;text-decoration:none}
@@ -220,6 +220,18 @@ main:focus{outline:none}
 .t-time small{color:var(--color-text-muted);font-size:11px}
 .desc{max-width:460px;overflow-wrap:anywhere}
 .toolbar .tools{display:flex;gap:8px;align-items:center}
+/* Gráfico: valores nas barras e balão ao passar o mouse / tocar */
+.chart .hit{fill:transparent;pointer-events:all;cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent}
+.chart .hit:focus-visible{stroke:var(--color-primary);stroke-width:2;stroke-dasharray:4 3;rx:6}
+.chart .barv{transition:opacity .15s ease}
+.chart .barv.man{fill:var(--color-secondary)}
+.chart.hov .barv{opacity:.4}
+.chart.hov .barv.on{opacity:1}
+.chart .val{fill:var(--color-text);font-size:10px;font-weight:800;pointer-events:none;font-variant-numeric:tabular-nums}
+.tip{position:absolute;z-index:5;pointer-events:none;padding:8px 11px;border-radius:var(--radius-md);background:var(--color-text);color:#fff;box-shadow:var(--shadow-lg);white-space:nowrap;opacity:0;transform:translate(-50%,-100%);transition:opacity .12s ease}
+.tip.show{opacity:1}
+.tip b{display:block;margin:1px 0;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums}
+.tip small{display:block;color:rgba(255,255,255,.78);font-size:11px;font-weight:650}
 </style>
 </head>
 <body>
@@ -246,7 +258,7 @@ main:focus{outline:none}
  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></symbol>
 </svg>
-
+ 
 <aside>
   <div>
     <div class="logo">Nexa <span>Gestão</span></div>
@@ -275,7 +287,7 @@ main:focus{outline:none}
     <button type="button" class="logout-btn" id="btnLogout"><svg class="icon" aria-hidden="true"><use href="#i-out"/></svg>Sair</button>
   </div>
 </aside>
-
+ 
 <main id="conteudo-principal" tabindex="-1">
   <header class="page-head">
     <div>
@@ -288,12 +300,12 @@ main:focus{outline:none}
       <button type="button" class="btn primary" data-open-new aria-haspopup="dialog" aria-controls="activityModal"><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg>Registrar anotação</button>
     </div>
   </header>
-
+ 
   <section class="metrics" id="metrics" aria-label="Métricas principais">
     <div class="card metric" style="--accent:var(--color-primary);--tint:var(--color-primary-light)">
       <div class="top"><div class="m-title" id="lblRevenue">Faturamento do dia</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-wallet"/></svg></span></div>
       <div class="m-value" id="dashMetricRevenue" aria-labelledby="lblRevenue" aria-live="polite">R$ 0,00</div>
-      <div class="m-foot"><span>Entradas de caixa</span><svg class="spark" id="sp-rev" viewBox="0 0 78 28" aria-hidden="true"></svg></div>
+      <div class="m-foot"><span id="cap-rev">Contas fechadas hoje</span><svg class="spark" id="sp-rev" viewBox="0 0 78 28" aria-hidden="true"></svg></div>
     </div>
     <div class="card metric" style="--accent:#a15c07;--tint:var(--color-warning-bg)">
       <div class="top"><div class="m-title" id="lblTables">Mesas ativas</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-list"/></svg></span></div>
@@ -303,19 +315,19 @@ main:focus{outline:none}
     <div class="card metric" style="--accent:var(--color-secondary);--tint:var(--color-info-bg)">
       <div class="top"><div class="m-title" id="lblKitchen">Pedidos na cozinha</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-chef"/></svg></span></div>
       <div class="m-value" id="dashMetricKitchen" aria-labelledby="lblKitchen" aria-live="polite">0</div>
-      <div class="m-foot"><span>Fila de produção (KDS)</span></div>
+      <div class="m-foot"><span id="cap-kitchen">Fila de produção (KDS)</span></div>
     </div>
     <div class="card metric" style="--accent:var(--color-success);--tint:var(--color-success-bg)">
       <div class="top"><div class="m-title" id="lblEmployees">Colaboradores</div><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span></div>
       <div class="m-value" id="dashMetricEmployees" aria-labelledby="lblEmployees" aria-live="polite">0</div>
-      <div class="m-foot"><span>Equipe em serviço</span></div>
+      <div class="m-foot"><span id="cap-emp">Equipe cadastrada</span></div>
     </div>
   </section>
-
+ 
   <section class="row2">
     <div class="card panel">
       <h2>Faturamento por hora</h2>
-      <p class="hint">Hoje, das 10h às 23h (R$)</p>
+      <p class="hint" id="hint-h">Hoje, das 10h às 23h (R$)</p>
       <svg class="chart" id="chart" viewBox="0 0 640 190" role="img" aria-label="Gráfico de faturamento por hora"></svg>
     </div>
     <div class="card panel">
@@ -324,7 +336,7 @@ main:focus{outline:none}
       <div class="plans" id="states"></div>
     </div>
   </section>
-
+ 
   <section class="card tablecard" aria-labelledby="tt">
     <div class="toolbar">
       <h2 class="panel-title" id="tt" style="font-size:13px;font-weight:800">Registro de Atividades e Avisos Operacionais</h2>
@@ -355,7 +367,7 @@ main:focus{outline:none}
     <div class="foot"><span id="count-label">Nenhuma anotação</span><span id="store-note" style="color:var(--color-warning);font-weight:700"></span></div>
   </section>
 </main>
-
+ 
 <div class="modal-overlay" id="activityModal" aria-hidden="true">
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="activityModalTitle">
     <div class="modal-head">
@@ -388,18 +400,20 @@ main:focus{outline:none}
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
+ 
 <script>
 (function () {
 'use strict';
-
+ 
 /* ===================== Estado (começa zerado) ===================== */
 var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 var KEY = 'nexa_dashboard_activities';
-var HOURS = [10,11,12,13,14,15,16,17,18,19,20,21,22,23];
-var data = { hourly: HOURS.map(function () { return 0; }), tables: { livre: 0, ocupada: 0, conta: 0 }, kitchen: 0, employees: 0 };
+var BASE_FROM = 10, BASE_TO = 23, HOURS = [];
+function buildHours(a, b) { HOURS = []; for (var h = a; h <= b; h++) HOURS.push(h); }
+buildHours(BASE_FROM, BASE_TO);
+var data = { hourly: HOURS.map(function () { return 0; }), revenue: 0, sales: 0, manual: 0, manualN: 0, tables: { livre: 0, ocupada: 0 }, kitchen: 0, kstat: { novo: 0, preparo: 0, pronto: 0 }, employees: 0 };
 var A = [], uid = 1, shown = {}, editingBusy = false;
-
+ 
 /* ===================== Utilitários ===================== */
 function $(s) { return document.querySelector(s); }
 function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
@@ -410,11 +424,10 @@ function iso(d) { return d.getFullYear() + '-' + String(d.getMonth() + 1).padSta
 function hhmm(d) { return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
 function num(v) { v = Number(v); return isFinite(v) && v >= 0 ? v : 0; }
 function slug(s) { return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
-
+ 
 /* ===================== Métricas ===================== */
 function metrics() {
-  return { revenue: data.hourly.reduce(function (s, v) { return s + v; }, 0),
-           tables: data.tables.ocupada + data.tables.conta, kitchen: data.kitchen, employees: data.employees };
+  return { revenue: data.revenue, tables: data.tables.ocupada, kitchen: data.kitchen, employees: data.employees };
 }
 function drawSpark(svg, d) {
   svg.textContent = '';
@@ -437,37 +450,83 @@ function updateMetrics() {
       if (p < 1) requestAnimationFrame(step); else n.setAttribute('aria-live', 'polite');
     })(t0);
   });
-  $('#cap-tables').textContent = m.tables === 0 ? 'Nenhuma em atendimento' : 'Em atendimento';
+  var tl = data.tables.livre, ks = data.kstat;
+  $('#cap-tables').textContent = (m.tables === 0 ? 'Nenhuma em atendimento' : 'Em atendimento') + (tl ? ' · ' + tl + (tl === 1 ? ' livre' : ' livres') : '');
+  var parts = [];
+  if (data.sales) parts.push(data.sales + (data.sales === 1 ? ' conta fechada' : ' contas fechadas'));
+  if (data.manualN) parts.push(data.manualN + (data.manualN === 1 ? ' lançamento manual' : ' lançamentos manuais'));
+  $('#cap-rev').textContent = parts.length ? parts.join(' · ') : 'Nenhuma entrada hoje';
+  $('#cap-kitchen').textContent = data.kitchen === 0 ? 'Fila vazia' : ks.novo + ' novos · ' + ks.preparo + ' em preparo · ' + ks.pronto + ' prontos';
+  $('#cap-emp').textContent = data.employees === 0 ? 'Nenhum cadastrado' : 'Equipe cadastrada';
   drawSpark($('#sp-rev'), data.hourly);
 }
-
+ 
 /* ===================== Gráfico: faturamento por hora ===================== */
 function niceTop(peak) { if (peak <= 0) return 300; var mag = Math.pow(10, Math.floor(Math.log10(peak))); return Math.ceil(peak / mag) * mag; }
 function kfmt(v) { return v >= 1000 ? (v / 1000).toLocaleString('pt-BR') + ' mil' : String(Math.round(v)); }
 function renderHourly() {
   var svg = $('#chart'); svg.textContent = '';
-  var W = 640, H = 190, L = 54, R = 10, Tp = 14, B = 28, peak = Math.max.apply(0, data.hourly), top = niceTop(peak);
+  $('#hint-h').textContent = 'Hoje, das ' + HOURS[0] + 'h às ' + HOURS[HOURS.length - 1] + 'h (R$)' + (data.manual > 0 ? ' · a barra "Manual" soma os ' + brl(data.manual) + ' lançados no Financeiro (sem horário)' : '');
+  var vals = data.hourly.concat(data.manual > 0 ? [data.manual] : []), W = 640, H = 190, L = 54, R = 10, Tp = 14, B = 28, peak = Math.max.apply(0, vals), top = niceTop(peak);
   function Y(v) { return Tp + (1 - v / top) * (H - Tp - B); }
   [0, top / 2, top].forEach(function (v) {
     svg.appendChild(mk('line', { x1: L, x2: W - R, y1: Y(v), y2: Y(v), 'class': 'grid' }));
     var t = mk('text', { x: L - 8, y: Y(v) + 3, 'text-anchor': 'end', 'class': 'lbl' }); t.textContent = kfmt(v); svg.appendChild(t);
   });
-  var bw = (W - L - R) / HOURS.length;
-  data.hourly.forEach(function (v, i) {
+  var bw = (W - L - R) / vals.length, best = vals.indexOf(peak), bars = [], showAll = bw >= 30;
+  function vfmt(x) { x = Math.round(x * 100) / 100; return x >= 1000 ? (x / 1000).toFixed(1).replace('.', ',') + ' mil' : (x % 1 ? x.toFixed(2).replace('.', ',') : String(x)); }
+  vals.forEach(function (v, i) {
     var h = v > 0 ? Math.max(H - B - Y(v), 3) : 0;
-    if (h) svg.appendChild(mk('rect', { x: L + i * bw + bw * .2, y: H - B - h, width: bw * .6, height: h, rx: 4, 'class': 'barv' }));
-    var t = mk('text', { x: L + i * bw + bw / 2, y: H - 8, 'text-anchor': 'middle', 'class': 'lbl' }); t.textContent = HOURS[i] + 'h'; svg.appendChild(t);
+    if (h) {
+      bars[i] = svg.appendChild(mk('rect', { x: L + i * bw + bw * .2, y: H - B - h, width: bw * .6, height: h, rx: 4, 'class': 'barv' + (i >= HOURS.length ? ' man' : '') }));
+      if (showAll || i === best) { var vt = mk('text', { x: L + i * bw + bw / 2, y: Math.max(H - B - h - 5, 10), 'text-anchor': 'middle', 'class': 'val' }); vt.textContent = vfmt(v); svg.appendChild(vt); }
+    }
+    var t = mk('text', { x: L + i * bw + bw / 2, y: H - 8, 'text-anchor': 'middle', 'class': 'lbl' }); t.textContent = i < HOURS.length ? HOURS[i] + 'h' : (bw >= 34 ? 'Manual' : 'Man.'); svg.appendChild(t);
   });
   var empty = peak === 0;
   if (empty) { var mt = mk('text', { x: (L + W - R) / 2, y: 82, 'text-anchor': 'middle', 'class': 'msg' }); mt.textContent = 'Sem vendas registradas hoje.'; svg.appendChild(mt); }
-  var best = data.hourly.indexOf(peak);
-  svg.setAttribute('aria-label', 'Gráfico de faturamento por hora de hoje' + (empty ? ': sem vendas registradas.' : ': maior faturamento às ' + HOURS[best] + 'h, com ' + brl(peak) + '.'));
+  svg.setAttribute('role', 'group');
+  svg.setAttribute('aria-label', 'Gráfico de faturamento por hora de hoje' + (empty ? ': sem vendas registradas.' : ': maior faturamento ' + (best < HOURS.length ? 'às ' + HOURS[best] + 'h' : 'nos lançamentos manuais do Financeiro') + ', com ' + brl(peak) + '.'));
+  var panel = svg.parentNode;
+  tipEl = panel.querySelector('.tip') || panel.appendChild(el('div', 'tip'));
+  tipEl.setAttribute('aria-hidden', 'true'); hideTip();
+  vals.forEach(function (v, i) {
+    var hit = mk('rect', { x: L + i * bw, y: Tp, width: bw, height: H - Tp, 'class': 'hit', tabindex: '0', role: 'img',
+      'aria-label': i < HOURS.length ? HOURS[i] + 'h às ' + (HOURS[i] + 1) + 'h: ' + (v > 0 ? brl(v) : 'sem vendas') : 'Lançamentos manuais do Financeiro, sem horário: ' + brl(v) });
+    var hr = i < HOURS.length ? HOURS[i] : null;
+    function on() { showTip(hit, bars[i], v, hr, i === best && peak > 0 && hr !== null, H, Tp, B); }
+    hit.addEventListener('pointerenter', on); hit.addEventListener('focus', on); hit.addEventListener('blur', hideTip);
+    hit.addEventListener('pointerleave', function (e) { if (e.pointerType !== 'touch') hideTip(); });   /* no toque o balão fica até tocar em outro lugar */
+    svg.appendChild(hit);
+  });
 }
-
+var tipEl = null;
+function hideTip() {
+  if (tipEl) tipEl.classList.remove('show');
+  var c = $('#chart'); c.classList.remove('hov');
+  c.querySelectorAll('.barv.on').forEach(function (b) { b.classList.remove('on'); });
+}
+function showTip(hit, bar, v, hour, isPeak, H, Tp, B) {
+  hideTip();
+  var c = $('#chart'), pr = c.parentNode.getBoundingClientRect(), hb = hit.getBoundingClientRect();
+  c.classList.add('hov'); if (bar) bar.classList.add('on');
+  tipEl.textContent = '';
+  tipEl.appendChild(el('small', '', hour === null ? 'Lançamentos manuais' : hour + 'h – ' + (hour + 1) + 'h'));
+  tipEl.appendChild(el('b', '', v > 0 ? brl(v) : 'Sem vendas'));
+  if (hour === null) tipEl.appendChild(el('small', '', data.manualN + (data.manualN === 1 ? ' lançamento' : ' lançamentos') + ' do Financeiro, sem horário'));
+  if (isPeak) tipEl.appendChild(el('small', '', 'Horário de maior faturamento'));
+  tipEl.classList.add('show');
+  var base = hb.top + (H - B - Tp) / (H - Tp) * hb.height, topY = bar ? bar.getBoundingClientRect().top : base;
+  var tw = tipEl.offsetWidth, th = tipEl.offsetHeight;
+  tipEl.style.left = Math.max(tw / 2 + 6, Math.min(pr.width - tw / 2 - 6, hb.left + hb.width / 2 - pr.left)) + 'px';
+  tipEl.style.top = Math.max(th + 8, topY - pr.top - (bar ? 24 : 8)) + 'px';   /* 24 px deixa o valor da barra visível */
+}
+document.addEventListener('pointerdown', function (e) { if (!(e.target.classList && e.target.classList.contains('hit'))) hideTip(); });
+ 
 /* ===================== Mesas por estado ===================== */
 function renderStates() {
-  var box = $('#states'), t = data.tables, total = t.livre + t.ocupada + t.conta; box.textContent = '';
-  [['Livres', t.livre, 'var(--color-success)'], ['Ocupadas', t.ocupada, 'var(--color-primary)'], ['Aguardando conta', t.conta, '#a15c07']].forEach(function (s, idx) {
+  var box = $('#states'), t = data.tables, total = t.livre + t.ocupada; box.textContent = '';
+  [['Livres', t.livre, 'var(--color-success)'], ['Ocupadas', t.ocupada, 'var(--color-primary)']].forEach(function (s, idx) {
     var pct = total ? Math.round(s[1] / total * 100) : 0;
     var row = el('div', 'plan-row'), tt = el('div', 't'), bar = el('div', 'bar'), i = el('i');
     tt.appendChild(el('span', '', s[0])); tt.appendChild(el('span', '', s[1] + ' (' + pct + '%)'));
@@ -477,31 +536,48 @@ function renderStates() {
   if (!total) box.appendChild(el('p', 'hint', 'Nenhuma mesa cadastrada ainda.'));
 }
 function renderAll() { updateMetrics(); renderHourly(); renderStates(); }
-
+ 
 /* ===================== Dados e atualização ===================== */
-/* Ponto de integração: ao ligar ao sistema real, troque o corpo de loadData() por um fetch/leitura de dados. */
-function loadData(silent) { return new Promise(function (res) { setTimeout(function () { res(data); }, silent || reduce ? 0 : 450); }); }
-function setData(p) {
-  if (!p || typeof p !== 'object') return;
-  if (Array.isArray(p.hourly)) data.hourly = HOURS.map(function (_, i) { return num(p.hourly[i]); });
-  if (p.tables && typeof p.tables === 'object') ['livre', 'ocupada', 'conta'].forEach(function (k) { if (k in p.tables) data.tables[k] = Math.round(num(p.tables[k])); });
-  if ('kitchen' in p) data.kitchen = Math.round(num(p.kitchen));
-  if ('employees' in p) data.employees = Math.round(num(p.employees));
-  renderAll();
+/* Lê o que as outras páginas gravam no navegador: vendas (mesas), mesas, cozinha e equipe. */
+var lastSig = '';
+function readArr(k) { try { var a = JSON.parse(localStorage.getItem(k) || '[]'); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+function collect() {
+  var today = iso(new Date()), sales = [], rev = 0, from = BASE_FROM, to = BASE_TO;
+  readArr('nexa_sales').forEach(function (v) {
+    var d = new Date(v && v.date); if (isNaN(d) || iso(d) !== today) return;
+    var t = num(v.total); sales.push({ h: d.getHours(), t: t }); rev += t;
+    from = Math.min(from, d.getHours()); to = Math.max(to, d.getHours());
+  });
+  var man = 0, manN = 0;   /* receitas lançadas à mão no Financeiro e já recebidas hoje (sem horário) */
+  readArr('nexa_finance').forEach(function (x) {
+    if (x && x.kind === 'receita' && x.status === 'pago' && x.paid === today) { man += num(x.value); manN++; }
+  });
+  buildHours(from, to);
+  var hourly = HOURS.map(function () { return 0; });
+  sales.forEach(function (x) { hourly[x.h - HOURS[0]] += x.t; });
+  var tb = { livre: 0, ocupada: 0 };
+  readArr('nexa_tables').forEach(function (t) { if (t && t.status === 'ocupada') tb.ocupada++; else if (t && t.status === 'livre') tb.livre++; });
+  var ks = { novo: 0, preparo: 0, pronto: 0 };
+  readArr('nexa_kitchen').forEach(function (o) { if (o && Object.prototype.hasOwnProperty.call(ks, o.status)) ks[o.status]++; });
+  var emp = readArr('nexa_employees').filter(function (x) { return x && typeof x.name === 'string'; }).length;
+  return { hourly: hourly, revenue: Math.round((rev + man) * 100) / 100, sales: sales.length, manual: Math.round(man * 100) / 100, manualN: manN, tables: tb, kitchen: ks.novo + ks.preparo + ks.pronto, kstat: ks, employees: emp };
 }
+function loadData(silent) { return new Promise(function (res) { setTimeout(function () { res(collect()); }, silent || reduce ? 0 : 450); }); }
 function stamp() { $('#updated').textContent = 'Atualizado às ' + hhmm(new Date()); }
 var btnRefresh = $('#btnRefresh'), metricsEl = $('#metrics');
 function refresh(silent) {
   if (editingBusy) return Promise.resolve();
   editingBusy = true;
   if (!silent) { metricsEl.classList.add('is-loading'); btnRefresh.classList.add('spin'); btnRefresh.setAttribute('aria-busy', 'true'); }
-  return loadData(silent).then(function (d) { data = d; renderAll(); stamp(); })
+  return loadData(silent).then(function (d) { var sig = JSON.stringify(d); if (sig !== lastSig) { lastSig = sig; data = d; renderAll(); } stamp(); })
     .catch(function () { toast('Não foi possível atualizar as métricas. Tente novamente.'); })
     .then(function () { editingBusy = false; metricsEl.classList.remove('is-loading'); btnRefresh.classList.remove('spin'); btnRefresh.removeAttribute('aria-busy'); });
 }
 btnRefresh.addEventListener('click', function () { refresh(false); });
-setInterval(function () { if (!document.hidden) refresh(true); }, 30000);   /* "tempo real": atualiza a cada 30 s */
-
+setInterval(function () { if (!document.hidden) refresh(true); }, 30000);   /* atualiza a cada 30 s */
+window.addEventListener('storage', function () { refresh(true); });          /* outra aba gravou algo */
+document.addEventListener('visibilitychange', function () { if (!document.hidden) refresh(true); });
+ 
 /* ===================== Anotações ===================== */
 /* Armazenamento com alternativas: localStorage -> sessionStorage -> window.name (sobrevive a recarregar a aba) */
 var store = (function () {
@@ -566,7 +642,7 @@ btnClear.addEventListener('click', function () {
   if (!window.confirm('Apagar todas as ' + A.length + ' anotações? Esta ação não pode ser desfeita.')) return;
   A = []; saveActs(); q.value = ''; render(); toast('Todas as anotações foram apagadas.');
 });
-
+ 
 /* ===================== Modal ===================== */
 var modal = $('#activityModal'), form = $('#newActivityForm'), toastEl = $('#toast'), lastFocus = null, toastTimer = 0;
 var FOC = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled])';
@@ -609,17 +685,16 @@ form.addEventListener('submit', function (e) {
   saveActs(); q.value = ''; closeActivityModal(); render();
   toast(store.kind === 'local' ? 'Anotação registrada.' : 'Anotação registrada, mas só fica nesta aba (armazenamento bloqueado).');
 });
-
+ 
 /* ===================== Sair e ganchos de integração ===================== */
 $('#btnLogout').addEventListener('click', function () { window.location.href = '../index.html'; });
 window.openActivityModal = openActivityModal; window.closeActivityModal = closeActivityModal;
 window.refreshDashboard = function () { return refresh(false); };
-window.NexaDashboard = { setData: setData, refresh: function () { return refresh(false); } };
-
+window.NexaDashboard = { refresh: function () { return refresh(false); } };
+ 
 /* ===================== Início ===================== */
-loadActs(); renderAll(); stamp(); render(); $('#store-note').textContent = STORE_NOTES[store.kind];
+data = collect(); lastSig = JSON.stringify(data); loadActs(); renderAll(); stamp(); render(); $('#store-note').textContent = STORE_NOTES[store.kind];
 })();
 </script>
 </body>
 </html>
-
